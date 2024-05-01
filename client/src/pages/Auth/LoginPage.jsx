@@ -1,23 +1,23 @@
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
+import AuthLayout from '../../layouts/AuthLayout';
+import { useState } from 'react';
+
 const LoginPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
     const handleClickLogin = () => {
+        setIsLoading(true);
         dispatch(setUser({ name: 'John Doe' }));
         navigate('/dashboard');
     };
     return (
-        <section>
-            <h2>Iniciar sesion</h2>
-            <button
-                onClick={handleClickLogin}
-                className="bg-blue-600 py-2 px-4 rounded-2xl"
-            >
-                Login
-            </button>
-        </section>
+        <AuthLayout>
+            <h1>Login</h1>
+            <button onClick={handleClickLogin}>Login</button>
+        </AuthLayout>
     );
 };
 

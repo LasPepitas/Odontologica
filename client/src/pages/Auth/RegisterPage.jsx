@@ -12,6 +12,8 @@ const RegisterPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const handleClickRegister = () => {
         setIsLoading(true);
         dispatch(setUser({ name: 'John Doe' }));
@@ -41,6 +43,8 @@ const RegisterPage = () => {
                             id="email"
                             placeholder="Correo"
                             className="px-2 w-full bg-transparent text-black"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </label>
                     <label
@@ -57,6 +61,8 @@ const RegisterPage = () => {
                             id="password"
                             placeholder="Contraseña"
                             className="px-2 w-full bg-transparent text-black"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </label>
                     <div className="flex items-center justify-center gap-x-3">

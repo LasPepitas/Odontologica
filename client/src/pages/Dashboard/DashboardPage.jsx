@@ -2,9 +2,9 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useSelector } from 'react-redux';
 
 const DashboardPage = () => {
-    // const { user } = useSelector((state) => state.user);
-    const { user, isAuthenticated, isLoading } = useAuth0();
-    console.log('user:', user);
+    const { user } = useSelector((state) => state.user);
+    const { user: userGoogle, isAuthenticated, isLoading } = useAuth0();
+    console.log('userGoogle:', userGoogle);
     console.log('auth:', isAuthenticated);
     return (
         <section>

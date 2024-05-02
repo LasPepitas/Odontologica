@@ -1,3 +1,4 @@
 import UserIcon from './userIcon.svg';
 import LockIcon from './lockIcon.svg';
-export { UserIcon, LockIcon };
+import EmailIcon from './emalIcon.svg';
+export { UserIcon, LockIcon , EmailIcon};

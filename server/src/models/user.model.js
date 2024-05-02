@@ -1,4 +1,5 @@
 import sequelize from '../config/database.js';
+import { DataTypes } from 'sequelize';
 
 const User = sequelize.define('user', {
     id: {
@@ -19,3 +20,5 @@ const User = sequelize.define('user', {
         allowNull: false,
     },
 });
+
+export default User;

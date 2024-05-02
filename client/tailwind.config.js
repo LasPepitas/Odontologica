@@ -8,6 +8,9 @@ export default {
                 secondary: '#047857',
                 danger: '#DC2626',
             },
+            borderRadius: {
+                vm: '.5rem',
+            },
         },
     },
     plugins: [],

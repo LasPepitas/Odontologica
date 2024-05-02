@@ -1,3 +1,3 @@
 import LoginImage from './login-img.jpg';
-
-export { LoginImage };
+import LogoGoogle from './google-logo.webp';
+export { LoginImage, LogoGoogle };

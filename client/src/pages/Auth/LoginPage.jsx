@@ -7,16 +7,23 @@ import AuthLayout from '../../layouts/AuthLayout';
 
 import { LockIcon, EmailIcon } from '../../assets/icons';
 import ButtonGoogle from './ButtonGoogle';
+
+import { login } from '../../services';
+
 const LoginPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const handleClickLogin = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleClickLogin = async () => {
         setIsLoading(true);
-        dispatch(setUser({ name: 'John Doe' }));
+        const { user } = await login({ email, password });
+        dispatch(setUser(user));
+        setIsLoading(false);
         navigate('/dashboard');
     };
-
     return (
         <AuthLayout>
             <div className="h-full flex flex-col justify-center w-full md:w-[80%] lg:w-[60%] max-w-[480px] mx-auto">
@@ -40,6 +47,8 @@ const LoginPage = () => {
                             id="email"
                             placeholder="Correo"
                             className="px-2 w-full bg-transparent text-black"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </label>
                     <label
@@ -56,6 +65,8 @@ const LoginPage = () => {
                             id="password"
                             placeholder="Contraseña"
                             className="px-2 w-full bg-transparent text-black"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </label>
                     <div className="flex items-center justify-center gap-x-3">

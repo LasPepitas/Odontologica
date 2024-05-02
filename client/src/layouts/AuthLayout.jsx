@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const AuthLayout = ({ children }) => {
     return (
         <main className="h-screen bg-white">
-            <section className="flex justify-center gap-x-6">
+            <section className="flex justify-center items-center gap-x-6 h-full">
                 <div className="flex-1 py-4 px-10">{children}</div>
                 <div className="hidden md:block flex-1 ">
                     <img

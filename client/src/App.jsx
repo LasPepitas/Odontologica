@@ -1,6 +1,14 @@
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes/index.routes';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 function App() {
     return (
-        <h2 className="text-red-400 text-4xl text-center font-bold">DEPLOY</h2>
+        <div className="min-h-screen">
+            <Provider store={store}>
+                <RouterProvider router={router} />
+            </Provider>
+        </div>
     );
 }
 

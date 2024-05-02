@@ -18,6 +18,15 @@ export const login = async (user) => {
     }
 };
 
+export const getProfile = async () => {
+    try {
+        const response = await api.get('auth/profile');
+        return response.data;
+    } catch (error) {
+        return null;
+    }
+};
+
 export const loginWithGoogle = async (user) => {
     try {
         const response = await api.post('/auth/login-google', user);

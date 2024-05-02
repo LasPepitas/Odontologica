@@ -9,5 +9,8 @@ router.get('/', (req, res) => {
 
 router.post('/login', Auth.login);
 router.post('/register', Auth.register);
+// router.post('/refresh-token', Auth.refreshToken);
+router.post('/logout', Auth.logout);
+router.post('/register-google', Auth.registerGoogle);
 
 export default router;

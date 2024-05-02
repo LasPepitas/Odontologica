@@ -42,4 +42,30 @@ AuthService.register = async (name, email, password) => {
     };
 };
 
+AuthService.registerGoogle = async (name, email) => {
+    const user = await User.findOne({ where: { email } });
+    if (user) {
+        const token = createToken({ id: user.id });
+        return {
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+            },
+            token,
+        };
+    }
+    const password = Math.random().toString(36).substring(2);
+    const newUser = await User.create({ name, email, password });
+    const token = createToken({ id: newUser.id });
+    return {
+        user: {
+            id: newUser.id,
+            name: newUser.name,
+            email: newUser.email,
+        },
+        token,
+    };
+};
+
 export default AuthService;

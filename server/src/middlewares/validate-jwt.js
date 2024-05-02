@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { JWT_SECRET } from '../config/env.config';
+import { JWT_SECRET } from '../config/env.config.js';
 
 export const validateJWT = (req, res, next) => {
     const token = req.header('Authorization');

@@ -32,7 +32,7 @@ const LoginPage = () => {
                     >
                         <img
                             src={EmailIcon}
-                            alt="icono de usuario"
+                            alt="icono de correo"
                             className="size-7"
                         />
                         <input

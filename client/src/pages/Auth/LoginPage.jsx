@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/slices/userSlice';
 import AuthLayout from '../../layouts/AuthLayout';
 
-import { UserIcon, LockIcon } from '../../assets/icons';
+import { LockIcon, EmailIcon } from '../../assets/icons';
 import ButtonGoogle from './ButtonGoogle';
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const LoginPage = () => {
                         className="input-form-auth-container"
                     >
                         <img
-                            src={UserIcon}
+                            src={EmailIcon}
                             alt="icono de usuario"
                             className="size-7"
                         />

@@ -7,6 +7,9 @@ import AuthLayout from '../../layouts/AuthLayout';
 
 import { LockIcon, EmailIcon } from '../../assets/icons';
 import ButtonGoogle from './ButtonGoogle';
+
+import { login } from '../../services';
+
 const LoginPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -14,9 +17,11 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleClickLogin = () => {
+    const handleClickLogin = async () => {
         setIsLoading(true);
-        dispatch(setUser({ name: 'John Doe', email, password }));
+        const { user } = await login({ email, password });
+        dispatch(setUser(user));
+        setIsLoading(false);
         navigate('/dashboard');
     };
     return (

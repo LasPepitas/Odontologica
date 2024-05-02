@@ -7,6 +7,7 @@ import AuthLayout from '../../layouts/AuthLayout';
 
 import { UserIcon, LockIcon, EmailIcon } from '../../assets/icons';
 import ButtonGoogle from './ButtonGoogle';
+import { register } from '../../services';
 
 const RegisterPage = () => {
     const dispatch = useDispatch();
@@ -14,9 +15,13 @@ const RegisterPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const handleClickRegister = () => {
+    const [name, setName] = useState('');
+    const handleClickRegister = async () => {
         setIsLoading(true);
-        dispatch(setUser({ name: 'John Doe' }));
+        const { user } = await register({ email, password, name });
+        console.log(user);
+        dispatch(setUser(user));
+        setIsLoading(false);
         navigate('/dashboard');
     };
 
@@ -29,10 +34,7 @@ const RegisterPage = () => {
                     </h2>
                 </header>
                 <form className="flex flex-col gap-y-9 w-full mb-8">
-                    <label
-                        htmlFor="name"
-                        className="input-form-auth-container"
-                    >
+                    <label htmlFor="name" className="input-form-auth-container">
                         <img
                             src={UserIcon}
                             alt="icono de usuario"
@@ -43,6 +45,8 @@ const RegisterPage = () => {
                             id="name"
                             placeholder="Nombre"
                             className="px-2 w-full bg-transparent text-black"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                         />
                     </label>
                     <label

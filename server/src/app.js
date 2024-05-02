@@ -20,7 +20,14 @@ app.use(express.json());
 app.use(auth(config));
 
 app.get('/', (req, res) => {
-    res.send('Hola mundo!');
+    // Verifica si el usuario está autenticado
+    if (req.oidc.isAuthenticated()) {
+        // Redirige al usuario a tu página web después de la autenticación
+        res.redirect('https://odontologica.pages.dev');
+    } else {
+        // Si no está autenticado, muestra un mensaje de bienvenida
+        res.send('Hola mundo!');
+    }
 });
 app.use('/api/v1/auth', AuthRoutes);
 app.use('', GoogleRoutes);

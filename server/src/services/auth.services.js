@@ -12,9 +12,16 @@ AuthService.login = async (email, password) => {
     if (!isCorrect) {
         throw new Error('Invalid credentials');
     }
-    user.password = undefined;
-    user.token = createToken({ id: user.id });
-    return user;
+    const token = createToken({ id: user.id });
+    console.log(user);
+    return {
+        user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+        },
+        token,
+    };
 };
 
 AuthService.register = async (name, email, password) => {
@@ -24,9 +31,15 @@ AuthService.register = async (name, email, password) => {
     }
     const hashPassword = await encrypt(password);
     const user = await User.create({ name, email, password: hashPassword });
-    user.token = createToken({ id: user.id });
-    user.password = undefined;
-    return user;
+    const token = createToken({ id: user.id });
+    return {
+        user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+        },
+        token,
+    };
 };
 
 export default AuthService;

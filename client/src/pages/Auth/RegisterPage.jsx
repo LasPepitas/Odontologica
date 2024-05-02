@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../store/slices/userSlice';
 import AuthLayout from '../../layouts/AuthLayout';
 
-import { UserIcon, LockIcon } from '../../assets/icons';
+import { UserIcon, LockIcon, EmailIcon } from '../../assets/icons';
 import ButtonGoogle from './ButtonGoogle';
 
 const RegisterPage = () => {
@@ -30,12 +30,28 @@ const RegisterPage = () => {
                 </header>
                 <form className="flex flex-col gap-y-9 w-full mb-8">
                     <label
-                        htmlFor="email"
+                        htmlFor="name"
                         className="input-form-auth-container"
                     >
                         <img
                             src={UserIcon}
                             alt="icono de usuario"
+                            className="size-7"
+                        />
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Nombre"
+                            className="px-2 w-full bg-transparent text-black"
+                        />
+                    </label>
+                    <label
+                        htmlFor="email"
+                        className="input-form-auth-container"
+                    >
+                        <img
+                            src={EmailIcon}
+                            alt="icono de correo"
                             className="size-7"
                         />
                         <input

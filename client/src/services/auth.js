@@ -18,6 +18,16 @@ export const login = async (user) => {
     }
 };
 
+export const authGoogle = async () => {
+    try {
+        const response = await api.get('/auth/google');
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+};
+
 export const loginWithGoogle = async (user) => {
     try {
         const response = await api.post('/auth/login-google', user);

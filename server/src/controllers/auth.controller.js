@@ -28,8 +28,16 @@ Auth.logout = async (req, res) => {
     res.send('Hello from logout');
 };
 
+Auth.profile = async (req, res) => {
+    try {
+        const user = await AuthService.profile(req.user.id);
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 Auth.registerGoogle = async (req, res) => {
-    res.json(req.oidc.user);
     if (req.oidc.isAuthenticated()) {
         const { email, name } = req.oidc.user;
         try {
@@ -42,4 +50,5 @@ Auth.registerGoogle = async (req, res) => {
         res.status(401).json({ error: 'Unauthorized' });
     }
 };
+
 export default Auth;

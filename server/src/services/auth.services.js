@@ -54,9 +54,10 @@ AuthService.profile = async (id) => {
     };
 };
 
-AuthService.registerGoogle = async (name, email) => {
-    const user = await User.findOne({ where: { email } });
-    if (user) {
+AuthService.registerGoogle = async (user) => {
+    const { email, name } = user;
+    const userExist = await User.findOne({ where: { email } });
+    if (userExist) {
         const token = createToken({ id: user.id });
         return {
             user: {

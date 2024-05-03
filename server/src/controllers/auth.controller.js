@@ -38,16 +38,11 @@ Auth.profile = async (req, res) => {
 };
 
 Auth.registerGoogle = async (req, res) => {
-    if (req.oidc.isAuthenticated()) {
-        const { email, name } = req.oidc.user;
-        try {
-            const user = await AuthService.registerGoogle(name, email);
-            res.status(201).json(user);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    } else {
-        res.status(401).json({ error: 'Unauthorized' });
+    try {
+        const user = await AuthService.registerGoogle(req.body);
+        res.status(201).json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 };
 

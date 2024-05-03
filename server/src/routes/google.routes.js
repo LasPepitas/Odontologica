@@ -17,4 +17,5 @@ router.get('/get-data-user', (req, res) => {
     console.log(user);
     res.json(user);
 });
+
 export default router;

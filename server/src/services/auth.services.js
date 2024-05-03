@@ -42,6 +42,18 @@ AuthService.register = async (name, email, password) => {
     };
 };
 
+AuthService.profile = async (id) => {
+    const user = await User.findOne({ where: { id: id } });
+    if (!user) {
+        throw new Error('User not found');
+    }
+    return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+    };
+};
+
 AuthService.registerGoogle = async (name, email) => {
     const user = await User.findOne({ where: { email } });
     if (user) {

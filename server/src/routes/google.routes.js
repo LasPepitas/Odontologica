@@ -12,4 +12,9 @@ router.get('/profile', requiresAuth(), (req, res) => {
     res.json(user);
 });
 
+router.get('/get-data-user', (req, res) => {
+    const user = req.oidc.user;
+    console.log(user);
+    res.json(user);
+});
 export default router;

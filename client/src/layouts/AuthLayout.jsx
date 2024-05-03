@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { authGoogle } from '../services/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../store/slices/userSlice';
-
 const AuthLayout = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();

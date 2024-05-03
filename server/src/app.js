@@ -8,7 +8,7 @@ const config = {
     authRequired: false,
     auth0Logout: true,
     secret: 'MWqCXqFwB7vJMouJRwg0N-sK2kVfTRYfYo4PU9YTcFiza22G3zp9TMeAGfk5Z9tX',
-    baseURL: 'https://odontologica.onrender.com',
+    baseURL: 'http://odontologica.onrender.com',
     clientID: 'af2OjaXew9TDVBvoolXMo1LkL19qD0Si',
     issuerBaseURL: 'https://valece.us.auth0.com',
 };

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { authGoogle } from '../services/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../store/slices/userSlice';
+
 const AuthLayout = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -23,7 +24,6 @@ const AuthLayout = ({ children }) => {
                     // Haz algo con los datos del usuario, como mostrarlos en la página
                     const userData = await authGoogle(usuario);
                     dispatch(setUser(userData));
-                    console.log(usuario);
                     if (userData.token) {
                         navigate('/dashboard');
                     }

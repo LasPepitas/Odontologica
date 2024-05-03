@@ -18,9 +18,9 @@ export const login = async (user) => {
     }
 };
 
-export const authGoogle = async () => {
+export const authGoogle = async (user) => {
     try {
-        const response = await api.get('/auth/google');
+        const response = await api.post('/auth/google', user);
         return response.data;
     } catch (error) {
         console.error(error);

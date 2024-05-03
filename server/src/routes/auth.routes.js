@@ -12,6 +12,6 @@ router.post('/register', Auth.register);
 router.post('/logout', Auth.logout);
 router.get('/profile', Auth.profile);
 // router.post('/refresh-token', Auth.refreshToken);
-router.get('/google', Auth.registerGoogle);
+router.post('/google', Auth.registerGoogle);
 
 export default router;

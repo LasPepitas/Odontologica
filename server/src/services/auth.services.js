@@ -42,9 +42,22 @@ AuthService.register = async (name, email, password) => {
     };
 };
 
-AuthService.registerGoogle = async (name, email) => {
-    const user = await User.findOne({ where: { email } });
-    if (user) {
+AuthService.profile = async (id) => {
+    const user = await User.findOne({ where: { id: id } });
+    if (!user) {
+        throw new Error('User not found');
+    }
+    return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+    };
+};
+
+AuthService.registerGoogle = async (user) => {
+    const { email, name } = user;
+    const userExist = await User.findOne({ where: { email } });
+    if (userExist) {
         const token = createToken({ id: user.id });
         return {
             user: {

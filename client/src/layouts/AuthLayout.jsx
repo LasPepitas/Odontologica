@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginImage } from '../assets/images';
 import PropTypes from 'prop-types';
-import { getProfile } from '../services/auth';
+import { authGoogle } from '../services/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../store/slices/userSlice';
 const AuthLayout = ({ children }) => {
@@ -13,7 +13,7 @@ const AuthLayout = ({ children }) => {
     useEffect(() => {
         const getDataUser = async () => {
             setIsLoading(true);
-            const response = await getProfile();
+            const response = await authGoogle();
             console.log(response);
             if (response) {
                 dispatch(setUser(response));

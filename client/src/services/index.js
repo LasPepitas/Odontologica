@@ -1,3 +1,3 @@
-import { register, login, registerWithGoogle } from './auth';
+import { register, login, authGoogle } from './auth';
 
-export { register, login, registerWithGoogle };
+export { register, login, authGoogle };

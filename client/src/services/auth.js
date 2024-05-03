@@ -18,11 +18,12 @@ export const login = async (user) => {
     }
 };
 
-export const getProfile = async () => {
+export const authGoogle = async () => {
     try {
-        const response = await api.get('auth/profile');
+        const response = await api.get('/auth/google');
         return response.data;
     } catch (error) {
+        console.error(error);
         return null;
     }
 };

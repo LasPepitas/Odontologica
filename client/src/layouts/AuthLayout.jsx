@@ -11,17 +11,29 @@ const AuthLayout = ({ children }) => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
     useEffect(() => {
-        const getDataUser = async () => {
+        const authUser = async () => {
             setIsLoading(true);
-            const response = await authGoogle();
-            console.log(response);
-            if (response) {
-                dispatch(setUser(response));
-                navigate('/dashboard');
+            try {
+                const usuarioCodificado = new URLSearchParams(
+                    window.location.search,
+                ).get('usuario');
+                if (usuarioCodificado) {
+                    // Decodifica los datos del usuario desde base64 y conviértelos a objeto JavaScript
+                    const usuario = JSON.parse(atob(usuarioCodificado));
+                    // Haz algo con los datos del usuario, como mostrarlos en la página
+                    const userData = await authGoogle(usuario);
+                    dispatch(setUser(userData));
+                    console.log(usuario);
+                    if (userData.token) {
+                        navigate('/dashboard');
+                    }
+                }
+            } catch (error) {
+                console.error(error);
             }
             setIsLoading(false);
         };
-        getDataUser();
+        authUser();
     }, [dispatch, navigate]);
     console.log(user);
     return (

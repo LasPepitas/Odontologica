@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Imprima&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -59,3 +60,5 @@ input {
 .input-form-auth-container ::placeholder {
     color: #a19f9f;
 }
+
+  

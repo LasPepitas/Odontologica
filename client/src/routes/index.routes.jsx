@@ -3,6 +3,8 @@ import PublicRoutes from "./PublicRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import { DashboardPage, LoginPage, RegisterPage } from "../pages";
 import Footer from "../components/Footer";
+import Header from "../components/Header";
+import LandigPage from "../pages/Landing/LandigPage";
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +14,7 @@ export const router = createBrowserRouter([
       { path: "login", element: <LoginPage /> },
       { path: "/", element: <Navigate to="/login" /> },
       { path: "register", element: <RegisterPage /> },
-      { path: "footer", element: <Footer /> },
+      { path: "Home", element: <LandigPage /> },
     ],
   },
   {

@@ -1,0 +1,23 @@
+@media (max-width: 568px) {
+    tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 5px;
+        border: 1px solid #ccc;
+        padding: 5px;
+    }
+    td {
+        display: block;
+    }
+    td::before {
+        display: block;
+        content: attr(data-title);
+        float: left;
+        font-weight: bold;
+        margin-right: 5px;
+        color: black;
+    }
+    thead {
+        display: none;
+    }
+}

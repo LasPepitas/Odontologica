@@ -3,6 +3,8 @@ import cors from 'cors';
 import { auth } from 'express-openid-connect';
 import AuthRoutes from './routes/auth.routes.js';
 import GoogleRoutes from './routes/google.routes.js';
+import AppointmentRoutes from './routes/appointment.routes.js';
+import './models/relations.js';
 
 const config = {
     authRequired: false,
@@ -33,11 +35,11 @@ app.get('/', (req, res) => {
             `https://odontologica.pages.dev/login?usuario=${usuarioCodificado}`,
         );
     } else {
-        // Si no está autenticado, muestra un mensaje de bienvenida
         res.send('Hola mundo!');
     }
 });
-app.use('/api/v1/auth', AuthRoutes);
 app.use('', GoogleRoutes);
+app.use('/api/v1/auth', AuthRoutes);
+app.use('/api/v1/appointments', AppointmentRoutes);
 
 export default app;

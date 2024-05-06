@@ -1,4 +1,3 @@
-import { ScheduleIcon, FileIcon, FilmIcon, MenuIcon } from '../assets/icons';
 import Options from './Options'
 
 const SideNav = ({ name }) => {

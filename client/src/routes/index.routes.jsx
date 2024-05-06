@@ -4,6 +4,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import { DashboardPage, LoginPage, RegisterPage } from "../pages";
 import Footer from "../components/Footer";
 import TurnosPage from "../pages/Turnos/TurnosPage";
+import ConsultasPage from "../pages/Consultas/ConsultasPage";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +22,8 @@ export const router = createBrowserRouter([
     element: <PrivateRoutes />,
     children: [
       { path: "dashboard", element: <DashboardPage /> },
-      { path: "turnos", element: <TurnosPage /> }
+      { path: "turnos", element: <TurnosPage /> },
+      { path: "consultas", element: <ConsultasPage /> },
     ],
   },
 ]);

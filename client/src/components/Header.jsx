@@ -16,7 +16,7 @@ export default function Header() {
 
           <div className="hidden md:block">
             <nav aria-label="Global">
-              <ul className="flex items-center gap-6 text-sm">
+              <ul className="flex items-center gap-6 text-lg">
                 <li>
                   <a
                     className="text-black transition hover:text-[#0c8fae]"
@@ -63,7 +63,7 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <div className="sm:flex sm:gap-4">
               <a
-                className="rounded-md bg-[#0c8fae] px-5 py-2.5 text-sm font-medium text-white shadow"
+                className="rounded-md bg-[#636ff1] px-5 py-2.5 text-sm font-medium text-white shadow"
                 href="#"
               >
                 Home

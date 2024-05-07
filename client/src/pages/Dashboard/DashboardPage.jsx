@@ -3,6 +3,7 @@ import SideNav from '../../layouts/SideNav';
 import HeaderDashboard from '../../layouts/HeaderDashboard';
 import { useState } from 'react';
 import Options from '../../layouts/Options';
+import { Outlet } from 'react-router-dom';
 
 const DashboardPage = () => {
     const { user } = useSelector((state) => state.user);
@@ -28,6 +29,7 @@ const DashboardPage = () => {
                             <Options className="bg-white shadow-lg rounded-md" />
                         )}
                     </div>
+                    <Outlet />
                 </div>
             </div>
         </div>

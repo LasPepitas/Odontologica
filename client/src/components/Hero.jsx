@@ -2,7 +2,6 @@ import React from "react";
 
 const background =
   "bg-gradient-to-b from-backgroundColorPrimary to-backgroundColorSecondary";
-const image = "dentista1.jpg"; // Make sure the image file path is correct
 const header = "Una clínica confiable \npara todas sus necesidades dentales";
 const subheader =
   "Sonrisas Radiantes, Cuidado Excepcional: \nTu Odontología de Confianza.";
@@ -17,9 +16,9 @@ function Hero() {
             <h1 className="text-5xl text-white font-PTS font-black whitespace-pre-line leading-tight">
               {header}
             </h1>
-            <h1 className="mt-8 text-lg text-white font-normal whitespace-pre-line leading-snug">
+            <h2 className="mt-8 text-lg text-white font-normal whitespace-pre-line leading-snug">
               {subheader}
-            </h1>
+            </h2>
             <button className="mt-8 bg-textColorPrimary text-white py-1 px-6 border rounded-2xl">
               {button}
             </button>

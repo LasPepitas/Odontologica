@@ -5,6 +5,8 @@ import { DashboardPage, LoginPage, RegisterPage } from "../pages";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LandigPage from "../pages/Landing/LandigPage";
+import TurnosPage from "../pages/Turnos/TurnosPage";
+import ConsultasPage from "../pages/Consultas/ConsultasPage";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +22,10 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <PrivateRoutes />,
-    children: [{ path: "dashboard", element: <DashboardPage /> }],
+    children: [
+      { path: "dashboard", element: <DashboardPage /> },
+      { path: "turnos", element: <TurnosPage /> },
+      { path: "consultas", element: <ConsultasPage /> },
+    ],
   },
 ]);

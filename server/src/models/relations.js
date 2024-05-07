@@ -1,7 +1,7 @@
 import User from './user.model.js';
 import Appointment from './appointment.model.js';
 import MedicalHistory from './medicalHistory.model.js';
-import Dentist from './dentis.model.js';
+import Dentist from './dentist.model.js';
 
 User.hasMany(Appointment, {
     foreignKey: 'id_user',

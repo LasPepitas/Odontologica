@@ -3,7 +3,6 @@ import SideNav from '../../layouts/SideNav';
 import HeaderDashboard from '../../layouts/HeaderDashboard';
 import { useState } from 'react';
 import Options from '../../layouts/Options';
-import PatientsTable from './Patients/PatientsTable';
 
 const DashboardPage = () => {
     const { user } = useSelector((state) => state.user);
@@ -29,7 +28,6 @@ const DashboardPage = () => {
                             <Options className="bg-white shadow-lg rounded-md" />
                         )}
                     </div>
-                    <PatientsTable />
                 </div>
             </div>
         </div>

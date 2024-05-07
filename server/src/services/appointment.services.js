@@ -1,9 +1,11 @@
 import Appointment from '../models/appointment.model.js';
+import User from '../models/user.model.js';
+import sequelize from '../config/database.js';
 const AppointmentService = {};
 
 AppointmentService.create = async (appointment) => {
-    const { date, duration, status, payment } = appointment;
-    if (!date || !duration || !status || !payment) {
+    const { date, duration, status, payment, id_user, id_dentist } = appointment;
+    if (!date || !duration || !status || !payment || !id_user || !id_dentist) {
         throw new Error('All fields are required');
     }
     const newAppointment = await Appointment.create({
@@ -11,6 +13,8 @@ AppointmentService.create = async (appointment) => {
         duration,
         status,
         payment,
+        id_user,
+        
     });
     return newAppointment;
 };
@@ -51,5 +55,18 @@ AppointmentService.delete = async (id) => {
     await Appointment.destroy({ where: { id } });
     return 'Appointment deleted';
 };
+
+AppointmentService.findAllByDentist = async (id) => {
+    const appointments = await sequelize.query(
+        'SELECT id_user, status, date, duration, payment, u.name as user_name, u.email as user_email, u.lastname as user_lastname FROM appointments a JOIN users u ON a.id_user = u.id WHERE a.id_dentist = :id',
+        {
+            replacements: { id },
+            type: sequelize.QueryTypes.SELECT,
+        }
+    )
+    return appointments;
+    
+};
+
 
 export default AppointmentService;

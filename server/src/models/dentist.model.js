@@ -16,14 +16,6 @@ const Dentist = sequelize.define('dentist', {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    dni: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    phone: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
     email: {
         type: DataTypes.STRING,
         allowNull: false,

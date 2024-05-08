@@ -10,7 +10,7 @@ import './waves.css'
 const PerfilPage = () => {
     const { user } = useSelector((state) => state.user);
     const { user: userGoogle, isAuthenticated, isLoading } = useAuth0();  
-    const {consultasDetalles, SetConsultasDetalles} = useState([])
+    const [consultasDetalles, SetConsultasDetalles] = useState([])
 
     useEffect(() => {
         const obtenerDatos = async () => {
@@ -39,7 +39,7 @@ const PerfilPage = () => {
                 <img src={EditIcon} alt="" className='size-7 mx-3'/>
             </div>
         </section>
-        <section className='md:w-[60%] md:px-10 md:py-20'>
+        <section className='md:w-[60%] md:px-10 md:py-20 md:flex flex-col justify-center items-center'>
             <div className='md:border md:p-4 md:w-[70%] md:rounded-lg md:shadow-xl'>
                 <p className='hidden md:block'>Informacion Personal</p>
                 <div className='md:block md:border-solid md:border md:border-[2px]'></div>

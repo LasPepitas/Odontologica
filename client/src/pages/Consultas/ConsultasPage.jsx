@@ -63,7 +63,7 @@ const ConsultasPage = () => {
                             {(!isLoading && dataPasada.length !== 0) &&
                                 <Tablas data={dataPasada} 
                                     botones={[
-                                    { id: 2, icon: DetailsIcon, funcion: handleFilterButton }
+                                    { id: 1, icon: DetailsIcon, funcion: handleFilterButton }
                                     ]}
                                 />
                             }

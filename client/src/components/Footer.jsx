@@ -15,7 +15,7 @@ export default function Footer() {
               />
             </div>
 
-            <p className="mt-6 max-w-md text-center leading-relaxed text-gray-500 sm:max-w-xs sm:text-left">
+            <p className="mt-6 max-w-md text-center leading-relaxed text-[#184d61] sm:max-w-xs sm:text-left">
               Porque tu sonrisa es la belleza de tu alma.
             </p>
 

@@ -7,6 +7,7 @@ import TurnosPage from '../pages/Turnos/TurnosPage';
 import ConsultasPage from '../pages/Consultas/ConsultasPage';
 import PatientsTable from '../pages/Dashboard/Patients/PatientsTable';
 import { AdminRoutes } from './AdminRoutes';
+import PerfilPage from '../pages/Perfil/PerfilPage';
 
 export const router = createBrowserRouter([
     {
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
                 children: [
                     { path: 'turnos', element: <TurnosPage /> },
                     { path: 'consultas', element: <ConsultasPage /> },
+                    { path: 'perfil', element: <PerfilPage /> },
                     {
                         path: '',
                         element: <AdminRoutes />,

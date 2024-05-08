@@ -9,7 +9,7 @@ const button = "+51 000-158-189";
 
 function Hero() {
   return (
-    <div style={{ backgroundColor: "#2e3081" }}>
+    <div style={{ backgroundColor: "#2e3081" }} className="mb-10">
       <div className="container max-w-screen-xl mx-auto flex justify-center items-center min-h-screen">
         <div className="grid md:grid-cols-12">
           <div className="col-span-6 place-self-center">

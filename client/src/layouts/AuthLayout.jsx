@@ -20,7 +20,6 @@ const AuthLayout = ({ children }) => {
                 if (usuarioCodificado) {
                     // Decodifica los datos del usuario desde base64 y conviértelos a objeto JavaScript
                     const usuario = JSON.parse(atob(usuarioCodificado));
-                    // Haz algo con los datos del usuario, como mostrarlos en la página
                     const userData = await authGoogle(usuario);
                     dispatch(setUser(userData));
                     if (userData.token) {

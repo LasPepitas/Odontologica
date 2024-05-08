@@ -7,7 +7,6 @@ import TurnosPage from '../pages/Turnos/TurnosPage';
 import ConsultasPage from '../pages/Consultas/ConsultasPage';
 import PatientsTable from '../pages/Dashboard/Patients/PatientsTable';
 import { AdminRoutes } from './AdminRoutes';
-import PerfilPage from '../pages/Perfil/PerfilPage';
 
 export const router = createBrowserRouter([
     {
@@ -17,8 +16,8 @@ export const router = createBrowserRouter([
             { path: 'login', element: <LoginPage /> },
             { path: '/', element: <Navigate to="/login" /> },
             { path: 'register', element: <RegisterPage /> },
-            { path: 'footer', element: <Footer /> },
-        ],
+            { path: "Home", element: <LandigPage /> },
+          ],
     },
     {
         path: '/',

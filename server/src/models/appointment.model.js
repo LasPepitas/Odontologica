@@ -15,6 +15,7 @@ const Appointment = sequelize.define('appointment', {
     duration: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 120,
     },
     status: {
         type: DataTypes.ENUM(
@@ -24,10 +25,12 @@ const Appointment = sequelize.define('appointment', {
             'rescheduled',
         ),
         allowNull: false,
+        defaultValue: 'pending',
     },
     payment: {
         type: DataTypes.ENUM('pending', 'completed'),
         allowNull: false,
+        defaultValue: 'pending',
     },
 });
 

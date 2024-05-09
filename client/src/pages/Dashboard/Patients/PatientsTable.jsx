@@ -53,6 +53,7 @@ const patients = [
 const PatientsTable = () => {
     return (
         <section className="w-full h-full px-4 py-3 bg-white rounded-lg">
+            <h2 className="font-extrabold text-3xl mb-8">Pacientes</h2>
             <table className="w-full rounded-lg  ">
                 <thead className="font-bold text-left text-xl bg-calypso-50 text-calypso-700">
                     <tr className="table-row p-4 ">

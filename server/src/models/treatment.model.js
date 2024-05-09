@@ -1,4 +1,4 @@
-import sequelize from '../config/database';
+import sequelize from '../config/database.js';
 import { DataTypes } from 'sequelize';
 
 const Treatment = sequelize.define('treatment', {
@@ -25,3 +25,5 @@ const Treatment = sequelize.define('treatment', {
         allowNull: false,
     },
 });
+
+export default Treatment;

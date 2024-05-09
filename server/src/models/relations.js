@@ -2,6 +2,7 @@ import User from './user.model.js';
 import Appointment from './appointment.model.js';
 import MedicalHistory from './medicalHistory.model.js';
 import Dentist from './dentist.model.js';
+import Treatment from './treatment.model.js';
 
 User.hasMany(Appointment, {
     foreignKey: 'id_user',
@@ -42,5 +43,17 @@ Dentist.hasMany(Appointment, {
 
 Appointment.belongsTo(Dentist, {
     foreignKey: 'id_dentist',
+    targetKey: 'id',
+});
+
+// Relation between Appointment with Treatment
+
+Appointment.belongsTo(Treatment, {
+    foreignKey: 'id_treatment',
+    targetKey: 'id',
+});
+
+Treatment.hasMany(Appointment, {
+    foreignKey: 'id_treatment',
     targetKey: 'id',
 });

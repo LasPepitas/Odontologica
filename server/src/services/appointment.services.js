@@ -4,18 +4,16 @@ import sequelize from '../config/database.js';
 const AppointmentService = {};
 
 AppointmentService.create = async (appointment) => {
-    const { date, duration, status, payment, id_user, id_dentist } =
-        appointment;
-    if (!date || !duration || !status || !payment || !id_user || !id_dentist) {
+    const { date, duration, id_user, id_dentist, id_treatment } = appointment;
+    if (!date || !duration || !id_user || !id_dentist || !id_treatment) {
         throw new Error('All fields are required');
     }
     const newAppointment = await Appointment.create({
         date,
         duration,
-        status,
-        payment,
         id_user,
         id_dentist,
+        id_treatment,
     });
     return newAppointment;
 };
@@ -34,18 +32,27 @@ AppointmentService.findOne = async (id) => {
 };
 
 AppointmentService.update = async (id, appointment) => {
-    const { date, duration, status, payment } = appointment;
-    if (!date || !duration || !status || !payment) {
-        throw new Error('All fields are required');
-    }
+    const { date, duration, status, payment, id_treatment } = appointment;
     const AppointmentExist = await Appointment.findByPk(id);
     if (!AppointmentExist) {
         throw new Error('Appointment not found');
     }
-    const updatedAppointment = await Appointment.update(appointment, {
-        where: { id },
-    });
-    return updatedAppointment;
+    const updatedAppointment = await Appointment.update(
+        {
+            date,
+            duration,
+            status,
+            payment,
+            id_treatment,
+        },
+        {
+            where: { id },
+        },
+    );
+    return {
+        message: 'Appointment updated',
+        updatedAppointment,
+    };
 };
 
 AppointmentService.delete = async (id) => {

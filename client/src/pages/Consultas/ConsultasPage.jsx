@@ -45,28 +45,28 @@ const ConsultasPage = () => {
 
     return (
         <div>
-                    <div className='flex flex-col m-2 '>
-                        <div className='flex justify-start text-3xl my-10'>
-                            <p>Consultas</p>
-                        </div>
-                        <p className='text-xl text-red-600 mb-4 underline'>Consultas Pendientes</p>
-                            {(!isLoading && dataPendiente.length !== 0) &&
-                                <Tablas data={dataPendiente} 
-                                    botones={[
-                                        { id: 1, icon: EditIcon, funcion: handleAddButton },
-                                        { id: 2, icon: DeleteIcon, funcion: handleAddButton }
-                                    ]}
-                                />
-                            }
+            <div className='flex flex-col m-2 '>
+                <div className='flex justify-start text-3xl my-10'>
+                    <p>Consultas</p>
+                </div>
+                <p className='text-xl text-red-600 mb-4 underline'>Consultas Pendientes</p>
+                {(!isLoading && dataPendiente.length !== 0) &&
+                    <Tablas data={dataPendiente} 
+                        botones={[
+                            { id: 1, icon: EditIcon, funcion: handleAddButton },
+                            { id: 2, icon: DeleteIcon, funcion: handleAddButton }
+                        ]}
+                    />
+                }
                         
-                        <p className='text-xl text-green-600 mt-10 mb-4 underline'>Consultas Pasadas</p>
-                            {(!isLoading && dataPasada.length !== 0) &&
-                                <Tablas data={dataPasada} 
-                                    botones={[
-                                    { id: 1, icon: DetailsIcon, funcion: handleFilterButton }
-                                    ]}
-                                />
-                            }
+                <p className='text-xl text-green-600 mt-10 mb-4 underline'>Consultas Pasadas</p>
+                    {(!isLoading && dataPasada.length !== 0) &&
+                        <Tablas data={dataPasada} 
+                            botones={[
+                                { id: 1, icon: DetailsIcon, funcion: handleFilterButton }
+                            ]}
+                        />
+                    }
             </div>
         </div>
     )

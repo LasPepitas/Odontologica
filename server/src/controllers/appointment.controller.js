@@ -49,10 +49,22 @@ Appointment.delete = async (req, res) => {
     }
 };
 
-
 Appointment.findAllByDentist = async (req, res) => {
     try {
-        const appointments = await AppointmentService.findAllByDentist(req.params.id);
+        const appointments = await AppointmentService.findAllByDentist(
+            req.params.id,
+        );
+        res.status(200).json(appointments);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+Appointment.findAllByUser = async (req, res) => {
+    try {
+        const appointments = await AppointmentService.findAllByUser(
+            req.params.id,
+        );
         res.status(200).json(appointments);
     } catch (error) {
         res.status(500).json({ error: error.message });

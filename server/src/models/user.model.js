@@ -33,12 +33,15 @@ const User = sequelize.define('user', {
         allowNull: false,
     },
     role: {
-        type: DataTypes.ENUM(
-            'admin',
-            'user',
-        )
-        , allowNull: true,
+        type: DataTypes.ENUM('admin', 'user', 'dentist'),
+        allowNull: true,
         defaultValue: 'user',
+    },
+    img_url: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue:
+            'https://t3.ftcdn.net/jpg/03/58/90/78/360_F_358907879_Vdu96gF4XVhjCZxN2kCG0THTsSQi8IhT.jpg',
     },
 });
 

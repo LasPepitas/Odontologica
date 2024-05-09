@@ -9,5 +9,6 @@ router.get('/:id', Appointment.findOne);
 router.put('/:id', Appointment.update);
 router.delete('/:id', Appointment.delete);
 router.get('/dentist/:id', Appointment.findAllByDentist);
+router.get('/user/:id', Appointment.findAllByUser);
 
 export default router;

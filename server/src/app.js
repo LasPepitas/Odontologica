@@ -1,9 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import { auth } from 'express-openid-connect';
+import fileUpload from 'express-fileupload';
+
 import AuthRoutes from './routes/auth.routes.js';
 import GoogleRoutes from './routes/google.routes.js';
 import AppointmentRoutes from './routes/appointment.routes.js';
+import UserRoutes from './routes/user.routes.js';
 import './models/relations.js';
 
 const config = {
@@ -20,6 +23,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(auth(config));
+app.use(
+    fileUpload({
+        useTempFiles: true,
+        tempFileDir: './uploads',
+    }),
+);
 
 app.get('/', (req, res) => {
     // Verifica si el usuario está autenticado
@@ -41,5 +50,6 @@ app.get('/', (req, res) => {
 app.use('', GoogleRoutes);
 app.use('/api/v1/auth', AuthRoutes);
 app.use('/api/v1/appointments', AppointmentRoutes);
+app.use('/api/v1/users', UserRoutes);
 
 export default app;

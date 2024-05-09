@@ -2,12 +2,13 @@ import { Navigate, createBrowserRouter } from 'react-router-dom';
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
 import { DashboardPage, LoginPage, RegisterPage } from '../pages';
-import Footer from '../components/Footer';
 import TurnosPage from '../pages/Turnos/TurnosPage';
 import ConsultasPage from '../pages/Consultas/ConsultasPage';
 import HorariosTable from '../pages/Dashboard/Horarios/HorariosTable';
 import PatientsTable from '../pages/Dashboard/Patients/PatientsTable';
 import { AdminRoutes } from './AdminRoutes';
+import LandigPage from '../pages/Landing/LandigPage';
+import PerfilPage from '../pages/Perfil/PerfilPage';
 
 export const router = createBrowserRouter([
     {
@@ -17,8 +18,8 @@ export const router = createBrowserRouter([
             { path: 'login', element: <LoginPage /> },
             { path: '/', element: <Navigate to="/login" /> },
             { path: 'register', element: <RegisterPage /> },
-            { path: 'footer', element: <Footer /> },
-        ],
+            { path: "Home", element: <LandigPage /> },
+          ],
     },
     {
         path: '/',
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
                 children: [
                     { path: 'turnos', element: <TurnosPage /> },
                     { path: 'consultas', element: <ConsultasPage /> },
+                    { path: 'perfil', element: <PerfilPage /> },
                     {
                         path: '',
                         element: <AdminRoutes />,
@@ -39,10 +41,9 @@ export const router = createBrowserRouter([
                             { path: 'reporte', element: <div>Reporte</div> },
                         ],
                     },
+                    {index:true, element:<PerfilPage/>}
                 ],
-            },
-            { path: 'turnos', element: <TurnosPage /> },
-            { path: 'consultas', element: <ConsultasPage /> },
+            }
         ],
     },
 ]);

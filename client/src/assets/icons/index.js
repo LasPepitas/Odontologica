@@ -10,7 +10,13 @@ import CloseIcon from './closeIcon.svg'
 import EditIcon from './editIcon.svg'
 import DeleteIcon from './deleteIcon.svg'
 import DetailsIcon from './detailsIcon.svg'
+import ToothIcon from './toothIcon.svg'
+import ProfileIcon from './profileIcon.svg'
+import OutIcon from './outIcon.svg'
+import ArrowIcon from './arrowIcon.svg'
+import ArrowLeftIcon from './arrowLeftIcon.svg'
 
 export { UserIcon, LockIcon , EmailIcon, ScheduleIcon, FileIcon, FilmIcon, MenuIcon, 
-    AddIcon, CloseIcon, EditIcon, DeleteIcon, DetailsIcon};
+    AddIcon, CloseIcon, EditIcon, DeleteIcon, DetailsIcon, ToothIcon, ProfileIcon, OutIcon, 
+    ArrowIcon, ArrowLeftIcon};
 

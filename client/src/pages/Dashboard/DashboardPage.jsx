@@ -4,33 +4,34 @@ import HeaderDashboard from '../../layouts/HeaderDashboard';
 import { useState } from 'react';
 import Options from '../../layouts/Options';
 import { Outlet } from 'react-router-dom';
+import { ArrowIcon, ArrowLeftIcon } from '../../assets/icons';
 
 const DashboardPage = () => {
     const { user } = useSelector((state) => state.user);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [showMenu,SetShowMenu] = useState(true);
 
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
+    const handleMenu = () =>{
+        SetShowMenu(!showMenu);
+    }
 
     return (
-        <div className="w-full h-screen flex flex-col font-imprima">
-            <HeaderDashboard showMenu={toggleMenu}></HeaderDashboard>
-            <div className="w-full h-full md:flex bg-[#D9D9D9] flex-row relative">
-                <div className="hidden md:flex">
-                    <SideNav name={user?.name}></SideNav>
-                </div>
-                <div className="md:w-[70%] w-full h-full relative">
-                    {isMenuOpen && (
-                        <div className="absolute inset-0 bg-black bg-opacity-30 backdrop-blur-lg z-10"></div>
-                    )}
-                    <div className="absolute inset-0 flex justify-center items-center z-20">
-                        {isMenuOpen && (
-                            <Options className="bg-white shadow-lg rounded-md" />
-                        )}
+        <div className={`w-full h-full ${showMenu ? "flex" : ""} font-imprima bg-white`}>
+            <div className="w-[15%] h-full md:flex bg-white">
+                <div className="md:flex">
+                    <div className='bg-white md:hidden'>
+                        <button onClick={handleMenu}>
+                            <img
+                                src={showMenu ? ArrowLeftIcon : ArrowIcon}
+                                alt="flecha icono"
+                                className='size-7'
+                            />
+                        </button>
                     </div>
-                    <Outlet />
-                </div>
+                    <SideNav showMenu={showMenu} />
+                </div>    
+            </div>
+            <div className={`${showMenu ? "w-[85%]" : "w-full"} h-screen overflow-y-scroll px-5`}>
+                <Outlet />
             </div>
         </div>
     );

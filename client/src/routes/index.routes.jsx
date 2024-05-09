@@ -4,6 +4,7 @@ import PrivateRoutes from './PrivateRoutes';
 import { DashboardPage, LoginPage, RegisterPage } from '../pages';
 import TurnosPage from '../pages/Turnos/TurnosPage';
 import ConsultasPage from '../pages/Consultas/ConsultasPage';
+import HorariosTable from '../pages/Dashboard/Horarios/HorariosTable';
 import PatientsTable from '../pages/Dashboard/Patients/PatientsTable';
 import { AdminRoutes } from './AdminRoutes';
 import LandigPage from '../pages/Landing/LandigPage';
@@ -17,8 +18,8 @@ export const router = createBrowserRouter([
             { path: 'login', element: <LoginPage /> },
             { path: '/', element: <Navigate to="/login" /> },
             { path: 'register', element: <RegisterPage /> },
-            { path: "Home", element: <LandigPage /> },
-          ],
+            { path: 'Home', element: <LandigPage /> },
+        ],
     },
     {
         path: '/',
@@ -36,11 +37,13 @@ export const router = createBrowserRouter([
                         element: <AdminRoutes />,
                         children: [
                             { path: 'pacientes', element: <PatientsTable /> },
+                            { path: 'horarios', element: <HorariosTable /> },
+                            { path: 'reporte', element: <div>Reporte</div> },
                         ],
                     },
-                    {index:true, element:<PerfilPage/>}
+                    { index: true, element: <PerfilPage /> },
                 ],
-            }
+            },
         ],
     },
 ]);

@@ -5,7 +5,8 @@ import { DashboardPage, LoginPage, RegisterPage } from '../pages';
 import Footer from '../components/Footer';
 import TurnosPage from '../pages/Turnos/TurnosPage';
 import ConsultasPage from '../pages/Consultas/ConsultasPage';
-import HorariosTable from '../pages/Dashboard/Horarios/HorariosTable';
+import PatientsTable from '../pages/Dashboard/Patients/PatientsTable';
+import { AdminRoutes } from './AdminRoutes';
 
 export const router = createBrowserRouter([
     {
@@ -25,7 +26,6 @@ export const router = createBrowserRouter([
             { path: 'dashboard', element: <DashboardPage /> },
             { path: 'turnos', element: <TurnosPage /> },
             { path: 'consultas', element: <ConsultasPage /> },
-            { path: 'horarios', element: <HorariosTable /> },
         ],
     },
 ]);

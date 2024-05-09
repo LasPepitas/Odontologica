@@ -18,8 +18,8 @@ export const router = createBrowserRouter([
             { path: 'login', element: <LoginPage /> },
             { path: '/', element: <Navigate to="/login" /> },
             { path: 'register', element: <RegisterPage /> },
-            { path: "Home", element: <LandigPage /> },
-          ],
+            { path: 'Home', element: <LandigPage /> },
+        ],
     },
     {
         path: '/',
@@ -41,9 +41,9 @@ export const router = createBrowserRouter([
                             { path: 'reporte', element: <div>Reporte</div> },
                         ],
                     },
-                    {index:true, element:<PerfilPage/>}
+                    { index: true, element: <PerfilPage /> },
                 ],
-            }
+            },
         ],
     },
 ]);

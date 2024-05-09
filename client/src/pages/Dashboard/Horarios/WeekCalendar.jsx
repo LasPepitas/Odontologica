@@ -2,10 +2,11 @@ import { getNextSevenDays } from '../../../utilities';
 import { hours } from '../../../constants';
 import { getAppointmentsByDentist } from '../../../services/appointments';
 import { useEffect, useState } from 'react';
+import Modal from './Modal';
 const appointments = [
     {
         id: 4,
-        date: '2024-05-07',
+        date: '2024-05-11',
         start: '15:00',
         end: '12:00',
         description: 'Descripción de la cita 4',
@@ -14,7 +15,7 @@ const appointments = [
     },
     {
         id: 5,
-        date: '2024-05-08',
+        date: '2024-05-09',
         start: '11:00',
         end: '12:00',
         description: 'Descripción de la cita 5',
@@ -23,7 +24,7 @@ const appointments = [
     },
     {
         id: 6,
-        date: '2024-05-08',
+        date: '2024-05-10',
         start: '14:00',
         end: '12:00',
         description: 'Descripción de la cita 6',
@@ -44,9 +45,21 @@ const WeekCalendar = () => {
     //     };
     //     fetchAppointments();
     // }, []);
+    const [modalData, setModalData] = useState({});
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleOpenModal = (data) => {
+        setModalData(data);
+        setIsModalOpen(true);
+    };
     return (
-        <div className="h-full w-full ">
-            <div className="grid grid-cols-8 h-[95%] bg-white rounded-xl">
+        <div className="h-full w-full my-6 overflow-y-auto">
+            {isModalOpen && (
+                <Modal
+                    modalData={modalData}
+                    onClose={() => setIsModalOpen(false)}
+                />
+            )}
+            <div className="h-[150%] grid grid-cols-8 bg-white rounded-xl">
                 <div className="grid grid-rows-10">
                     <h4 className="font-bold justify-center flex items-center border border-gray-200">
                         Horarios
@@ -85,9 +98,14 @@ const WeekCalendar = () => {
                                             hour === appointment.start
                                         ) {
                                             return (
-                                                <div
+                                                <button
                                                     key={appointment.id}
                                                     className="bg-blue-500 text-white p-2 h-full w-full rounded-md"
+                                                    onClick={() => {
+                                                        handleOpenModal(
+                                                            appointment,
+                                                        );
+                                                    }}
                                                 >
                                                     <p className="text-sm font-bold">
                                                         {appointment.user_name}
@@ -97,7 +115,7 @@ const WeekCalendar = () => {
                                                             appointment.treatment_name
                                                         }
                                                     </p>
-                                                </div>
+                                                </button>
                                             );
                                         } else {
                                             return null;

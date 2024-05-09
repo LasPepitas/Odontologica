@@ -1,22 +1,24 @@
 import dayjs from 'dayjs';
+import weekOfYear from 'dayjs/plugin/weekOfYear';
 import { es } from 'dayjs/locale/es';
 
 dayjs.locale('es');
 
-export function getDaysMonth(month = dayjs().month()) {
-    // Redondea el mes al valor entero más cercano
-    month = Math.floor(month);
-    const currentYear = dayjs().year();
-    const firstDay = dayjs(new Date(currentYear, month, 1)).day();
-    let currentMonth = 0 - firstDay;
+export const getNextSevenDays = () => {
+    const days = new Array(7).fill(null).map((_, index) => {
+        return dayjs().add(index, 'day');
+    });
+    return days;
+};
 
+export const getDaysForWeek = (week = dayjs().week()) => {
+    dayjs.extend(weekOfYear);
+    const currentYear = dayjs().year();
     const daysMatrix = new Array(5).fill([]).map(() => {
         return new Array(7).fill(null).map(() => {
-            currentMonth++;
-            // Crea un objeto dayjs para representar cada día del mes
-            return dayjs(new Date(currentYear, month, currentMonth));
+            return dayjs().week(week).year(currentYear);
         });
     });
 
     return daysMatrix;
-}
+};

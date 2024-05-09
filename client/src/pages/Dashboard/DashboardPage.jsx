@@ -33,7 +33,7 @@ const DashboardPage = () => {
             <div
                 className={`${
                     showMenu ? 'w-[85%]' : 'w-full'
-                } h-full px-5 mx-auto pt-10`}
+                } h-full px-5 mx-auto pt-10 overflow-y-scroll`}
             >
                 <Outlet />
             </div>

@@ -1,7 +1,7 @@
 import sequelize from '../config/database.js';
 import { DataTypes } from 'sequelize';
 
-const User = sequelize.define('user', {
+const Dentist = sequelize.define('dentist', {
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -12,7 +12,7 @@ const User = sequelize.define('user', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    lastname: {
+    lastName: {
         type: DataTypes.STRING,
         allowNull: true,
     },
@@ -20,29 +20,18 @@ const User = sequelize.define('user', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    dni: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    phone: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
     password: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    role: {
-        type: DataTypes.ENUM('admin', 'user', 'dentist'),
-        allowNull: true,
-        defaultValue: 'user',
+    specialty: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
-    img_url: {
+    schedule: {
         type: DataTypes.STRING,
-        allowNull: true,
-        defaultValue:
-            'https://t3.ftcdn.net/jpg/03/58/90/78/360_F_358907879_Vdu96gF4XVhjCZxN2kCG0THTsSQi8IhT.jpg',
+        allowNull: false,
     },
 });
 
-export default User;
+export default Dentist;

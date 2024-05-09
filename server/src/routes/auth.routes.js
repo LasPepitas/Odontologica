@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 router.post('/login', Auth.login);
 router.post('/register', Auth.register);
 router.post('/logout', Auth.logout);
-router.get('/profile', Auth.profile);
+router.get('/profile', validateJWT, Auth.profile);
 // router.post('/refresh-token', Auth.refreshToken);
 router.post('/google', Auth.registerGoogle);
 

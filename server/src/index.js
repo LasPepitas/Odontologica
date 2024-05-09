@@ -6,7 +6,7 @@ app.listen(3000, async () => {
     try {
         // await sequelize.sync({
         //     force: true,
-        // }); // No ejecutar
+        // }); // No ejecutar en producción
         await sequelize.authenticate();
         console.log('Database connected');
     } catch (error) {

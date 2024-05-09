@@ -58,17 +58,17 @@ AuthService.registerGoogle = async (user) => {
     const { email, name } = user;
     const userExist = await User.findOne({ where: { email } });
     if (userExist) {
-        const token = createToken({ id: user.id });
+        const token = createToken({ id: userExist.id });
         return {
             user: {
-                id: user.id,
-                name: user.name,
-                email: user.email,
+                id: userExist.id,
+                name: userExist.name,
+                email: userExist.email,
             },
             token,
         };
     }
-    const password = Math.random().toString(36).substring(2);
+    const password = await encrypt(Math.random().toString(36).substring(2));
     const newUser = await User.create({ name, email, password });
     const token = createToken({ id: newUser.id });
     return {

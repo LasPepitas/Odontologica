@@ -4,7 +4,8 @@ import sequelize from '../config/database.js';
 const AppointmentService = {};
 
 AppointmentService.create = async (appointment) => {
-    const { date, duration, status, payment, id_user, id_dentist } = appointment;
+    const { date, duration, status, payment, id_user, id_dentist } =
+        appointment;
     if (!date || !duration || !status || !payment || !id_user || !id_dentist) {
         throw new Error('All fields are required');
     }
@@ -14,7 +15,7 @@ AppointmentService.create = async (appointment) => {
         status,
         payment,
         id_user,
-        
+        id_dentist,
     });
     return newAppointment;
 };
@@ -62,11 +63,21 @@ AppointmentService.findAllByDentist = async (id) => {
         {
             replacements: { id },
             type: sequelize.QueryTypes.SELECT,
-        }
-    )
+        },
+    );
     return appointments;
-    
 };
 
+AppointmentService.findAllByUser = async (id) => {
+    const userExist = await User.findByPk(id);
+    if (!userExist) {
+        throw new Error('User not found');
+    }
+    const appointments = await Appointment.findAll({
+        where: { id_user: id },
+    });
+
+    return appointments;
+};
 
 export default AppointmentService;

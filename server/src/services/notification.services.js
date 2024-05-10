@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer';
 import Notification from '../models/notification.model.js';
 import User from '../models/user.model.js';
 import { NODEMAILER_PASS } from '../config/env.config.js';
+import Dentist from '../models/dentist.model.js';
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -85,6 +86,30 @@ NotificationService.delete = async (id) => {
         where: { id },
     });
     return notification;
+};
+
+// create notification for the dentist
+NotificationService.createDentistNotification = async (notification) => {
+    const { title, content, id_dentist } = notification;
+    if (!title || !content || !id_dentist) {
+        throw new Error('All fields are required');
+    }
+    const dentist = await Dentist.findByPk(id_dentist);
+    const infoNotificationEmail = await transporter.sendMail({
+        from: 'Odonto App <odonto.app7@gmail.com>',
+        to: dentist.email,
+        subject: title,
+        html: `
+            <div>
+                <h2 style="text-align: center; font-bold: bold;">${title}</h2>
+                <p style="text-align: center;">${content}</p>
+                <p style="text-align: center;">Revise su perfil en la aplicación para más detalles.</p>
+                <a style="display: block; width: 200px; margin: 0 auto; background-color: #007bff; color: white; text-align: center; text-decoration: none; padding: 10px; border-radius: 5px;" href="https://odontologica.pages.dev/dashboard">Ir a mi perfil</a>
+            </div>
+        `,
+    });
+    console.log('Message sent: %s', infoNotificationEmail.messageId);
+    return true;
 };
 
 export default NotificationService;

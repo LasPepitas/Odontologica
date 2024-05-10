@@ -2,15 +2,50 @@ import sequelize from '../config/database.js';
 import NotificationService from './notification.services.js';
 import Appointment from '../models/appointment.model.js';
 import User from '../models/user.model.js';
-
+import Payment from '../models/payment.model.js';
+import { uploadImage } from '../utils/uploadImage.js';
 const AppointmentService = {};
 
-AppointmentService.create = async (appointment) => {
-    const { date, duration, description, id_user, id_dentist, id_treatment } =
-        appointment;
-    if (!date || !duration || !id_user || !id_dentist || !id_treatment) {
-        throw new Error('All fields are required');
+AppointmentService.create = async (appointment, image = null) => {
+    const {
+        date,
+        duration,
+        description,
+        id_user,
+        id_dentist,
+        id_treatment,
+        amount,
+    } = appointment;
+    console.log(date, duration, id_user, id_dentist, id_treatment, amount);
+    if (
+        !date ||
+        !duration ||
+        !id_user ||
+        !id_treatment ||
+        !amount ||
+        id_dentist === null
+    ) {
+        throw new Error('All fields are required for the appointment');
     }
+
+    let payment_receipt_image = null;
+    if (image) {
+        const { tempFilePath } = image;
+        const { secure_url } = await uploadImage(tempFilePath);
+        payment_receipt_image = secure_url;
+    }
+
+    const newPayment = await Payment.create({
+        amount,
+        payment_method: 'yape',
+        payment_receipt_image,
+        id_user,
+    });
+    await NotificationService.createDentistNotification({
+        title: 'Nueva cita',
+        content: `Tienes una nueva cita programada para el ${date}`,
+        id_dentist,
+    });
     const newAppointment = await Appointment.create({
         date,
         duration,
@@ -18,7 +53,9 @@ AppointmentService.create = async (appointment) => {
         id_user,
         id_dentist,
         id_treatment,
+        id_payment: newPayment.id,
     });
+
     return newAppointment;
 };
 
@@ -36,8 +73,7 @@ AppointmentService.findOne = async (id) => {
 };
 
 AppointmentService.update = async (id, appointment) => {
-    const { date, duration, status, payment, id_treatment, description } =
-        appointment;
+    const { date, duration, status, id_treatment, description } = appointment;
     const AppointmentExist = await Appointment.findByPk(id);
     if (!AppointmentExist) {
         throw new Error('Appointment not found');
@@ -47,7 +83,6 @@ AppointmentService.update = async (id, appointment) => {
             date,
             duration,
             status,
-            payment,
             id_treatment,
             description,
         },

@@ -36,10 +36,6 @@ const Appointment = sequelize.define('appointment', {
         allowNull: false,
         defaultValue: 'pending',
     },
-    id_payment: {
-        type: DataTypes.UUID,
-        allowNull: true,
-    },
 });
 
 export default Appointment;

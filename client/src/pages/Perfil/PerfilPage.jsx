@@ -11,6 +11,8 @@ const PerfilPage = () => {
     const { user: userGoogle, isAuthenticated, isLoading } = useAuth0();
     const [consultasDetalles, SetConsultasDetalles] = useState([]);
 
+    console.log(user.id)
+
     useEffect(() => {
         const obtenerDatos = async () => {
             try {
@@ -67,7 +69,7 @@ const PerfilPage = () => {
                             type="text"
                             id="nombre"
                             className="w-[80%] md:w-[40%] rounded-lg px-3 border-solid border"
-                            placeholder={user.name}
+                            placeholder={user.email}
                             disabled
                         />
                     </div>

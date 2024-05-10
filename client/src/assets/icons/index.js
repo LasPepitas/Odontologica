@@ -15,8 +15,10 @@ import ProfileIcon from './profileIcon.svg'
 import OutIcon from './outIcon.svg'
 import ArrowIcon from './arrowIcon.svg'
 import ArrowLeftIcon from './arrowLeftIcon.svg'
+import CopyIcon from './copyIcon.svg'
+import BackArrowIcon from './backArrowIcon.svg'
 
 export { UserIcon, LockIcon , EmailIcon, ScheduleIcon, FileIcon, FilmIcon, MenuIcon, 
     AddIcon, CloseIcon, EditIcon, DeleteIcon, DetailsIcon, ToothIcon, ProfileIcon, OutIcon, 
-    ArrowIcon, ArrowLeftIcon};
+    ArrowIcon, ArrowLeftIcon, CopyIcon, BackArrowIcon};
 

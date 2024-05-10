@@ -1,5 +1,5 @@
-INSERT INTO dentists (id, name, lastName, email, password, specialty, schedule, createdAt, updatedAt) 
-VALUES ('1', 'Juan', 'Pérez', 'juan@example.com', 'password123', 1, 'Monday-Friday 9am-5pm', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO dentists (name, lastName, email, password, specialty, schedule, createdAt, updatedAt) 
+VALUES ('Juan', 'Pérez', 'renerolando321@gmail.com', 'password123', 1, 'Monday-Friday 9am-5pm', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO treatments (id, name, description, duration, price, createdAt, updatedAt)
 VALUES 

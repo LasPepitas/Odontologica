@@ -17,6 +17,10 @@ const Appointment = sequelize.define('appointment', {
         allowNull: false,
         defaultValue: 120,
     },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+    },
     status: {
         type: DataTypes.ENUM(
             'pending',

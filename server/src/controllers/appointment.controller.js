@@ -3,7 +3,10 @@ const Appointment = {};
 
 Appointment.create = async (req, res) => {
     try {
-        const appointment = await AppointmentService.create(req.body);
+        const appointment = await AppointmentService.create(
+            req.body,
+            req.files?.image,
+        );
         res.status(201).json(appointment);
     } catch (error) {
         res.status(500).json({ error: error.message });

@@ -7,6 +7,7 @@ import AuthRoutes from './routes/auth.routes.js';
 import GoogleRoutes from './routes/google.routes.js';
 import AppointmentRoutes from './routes/appointment.routes.js';
 import UserRoutes from './routes/user.routes.js';
+import NotificationRoutes from './routes/notification.routes.js';
 import './models/relations.js';
 
 const config = {
@@ -51,5 +52,6 @@ app.use('', GoogleRoutes);
 app.use('/api/v1/auth', AuthRoutes);
 app.use('/api/v1/appointments', AppointmentRoutes);
 app.use('/api/v1/users', UserRoutes);
+app.use('/api/v1/notifications', NotificationRoutes);
 
 export default app;

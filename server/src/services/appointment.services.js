@@ -1,16 +1,20 @@
+import sequelize from '../config/database.js';
+import NotificationService from './notification.services.js';
 import Appointment from '../models/appointment.model.js';
 import User from '../models/user.model.js';
-import sequelize from '../config/database.js';
+
 const AppointmentService = {};
 
 AppointmentService.create = async (appointment) => {
-    const { date, duration, id_user, id_dentist, id_treatment } = appointment;
+    const { date, duration, description, id_user, id_dentist, id_treatment } =
+        appointment;
     if (!date || !duration || !id_user || !id_dentist || !id_treatment) {
         throw new Error('All fields are required');
     }
     const newAppointment = await Appointment.create({
         date,
         duration,
+        description,
         id_user,
         id_dentist,
         id_treatment,
@@ -32,7 +36,8 @@ AppointmentService.findOne = async (id) => {
 };
 
 AppointmentService.update = async (id, appointment) => {
-    const { date, duration, status, payment, id_treatment } = appointment;
+    const { date, duration, status, payment, id_treatment, description } =
+        appointment;
     const AppointmentExist = await Appointment.findByPk(id);
     if (!AppointmentExist) {
         throw new Error('Appointment not found');
@@ -44,11 +49,19 @@ AppointmentService.update = async (id, appointment) => {
             status,
             payment,
             id_treatment,
+            description,
         },
         {
             where: { id },
         },
     );
+
+    NotificationService.create({
+        title: 'Cita actualizada',
+        content: `Tu cita ha sido actualizada`,
+        id_user: AppointmentExist.id_user,
+    });
+
     return {
         message: 'Appointment updated',
         updatedAppointment,

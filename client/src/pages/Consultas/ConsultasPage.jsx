@@ -11,6 +11,7 @@ const ConsultasPage = () => {
     const { user: userGoogle, isAuthenticated, isLoading } = useAuth0();
     const [citas, setCitas] = useState([])
     const [opcion, setOpcion] = useState(1)
+    const [loading, setLoading] = useState(false)
     
     useEffect(() => {
         const obtenerDatos = async () => {
@@ -24,6 +25,7 @@ const ConsultasPage = () => {
                 if (response.ok) {
                     const data = await response.json()
                     setCitas(data)
+                    setLoading(true)
     
                 } else {
                     console.error('Error en la solicitud POST:', response.status);
@@ -95,6 +97,7 @@ const ConsultasPage = () => {
                 </div>
                 <div className='flex'>
                     {citas.length != 0 && handleFilterButton(opcion)}
+                    <p className={`text-2xl ${loading ? "hidden" :"flex" }`}>Cargando...</p>
                 </div>
             </div>
         </div>

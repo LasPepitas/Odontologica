@@ -31,11 +31,6 @@ const Appointment = sequelize.define('appointment', {
         allowNull: false,
         defaultValue: 'pending',
     },
-    payment: {
-        type: DataTypes.ENUM('pending', 'completed'),
-        allowNull: false,
-        defaultValue: 'pending',
-    },
 });
 
 export default Appointment;

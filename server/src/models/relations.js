@@ -1,10 +1,10 @@
-import User from './user.model.js';
-import Appointment from './appointment.model.js';
-import MedicalHistory from './medicalHistory.model.js';
-import Dentist from './dentist.model.js';
-import Treatment from './treatment.model.js';
-import Notification from './notification.model.js';
 import Payment from './payment.model.js';
+import Notification from './notification.model.js';
+import MedicalHistory from './medicalHistory.model.js';
+import Appointment from './appointment.model.js';
+import Dentist from './dentist.model.js';
+import User from './user.model.js';
+import Treatment from './treatment.model.js';
 User.hasMany(Appointment, {
     foreignKey: 'id_user',
     targetKey: 'id',
@@ -73,12 +73,7 @@ Notification.belongsTo(User, {
 
 // Payment relation with Appointment
 
-Appointment.hasOne(Payment, {
-    foreignKey: 'id_payment',
-    targetKey: 'id',
-});
-
-Payment.belongsTo(Appointment, {
+Appointment.belongsTo(Payment, {
     foreignKey: 'id_payment',
     targetKey: 'id',
 });

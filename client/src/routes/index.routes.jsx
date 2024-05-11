@@ -10,6 +10,7 @@ import { AdminRoutes } from './AdminRoutes';
 import LandigPage from '../pages/Landing/LandigPage';
 import PerfilPage from '../pages/Perfil/PerfilPage';
 import Pagos from '../pages/Turnos/Pagos/Pagos';
+import PatientIndividual from '../pages/Dashboard/Patients/PatientIndividual';
 
 export const router = createBrowserRouter([
     {
@@ -33,7 +34,7 @@ export const router = createBrowserRouter([
                     { path: 'turnos', element: <TurnosPage /> },
                     { path: 'consultas', element: <ConsultasPage /> },
                     { path: 'perfil', element: <PerfilPage /> },
-                    
+
                     {
                         path: '',
                         element: <AdminRoutes />,
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
                             { path: 'pacientes', element: <PatientsTable /> },
                             { path: 'horarios', element: <HorariosTable /> },
                             { path: 'reporte', element: <div>Reporte</div> },
+                            {
+                                path: 'pacientes/:id',
+                                element: <PatientIndividual />,
+                            },
                         ],
                     },
                     { index: true, element: <PerfilPage /> },

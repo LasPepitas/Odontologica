@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const Tablas = ({ data, botones }) => {
   return (
     <div>
@@ -13,7 +14,7 @@ const Tablas = ({ data, botones }) => {
               <td className="w-[34%] border px-4 py-2 text-center">{registro.fecha}</td>
               <td className="w-[33%] border px-4 py-2 text-center">{registro.hora}</td>
               <td className="w-[33%] border px-4 py-2 flex justify-center">
-                {botones && botones.length !== 0 &&
+                {(botones && botones.length !== 0) ? (
                   botones.map(boton => (
                     <button
                       key={boton.id}
@@ -27,7 +28,10 @@ const Tablas = ({ data, botones }) => {
                         className={`size-7 mx-1 opacity-50`} 
                       />
                     </button>
-                  ))}
+                  ))
+                ) : (
+                  <></>
+                )}
               </td>
             </tr>
           ))}

@@ -11,6 +11,8 @@ const PerfilPage = () => {
     const { user: userGoogle, isAuthenticated, isLoading } = useAuth0();
     const [consultasDetalles, SetConsultasDetalles] = useState([]);
 
+    console.log(user.id);
+
     useEffect(() => {
         const obtenerDatos = async () => {
             try {
@@ -29,8 +31,8 @@ const PerfilPage = () => {
     }, []);
 
     return (
-        <div className="md:flex w-full h-screen justify-center items-center gap-6">
-            <section className="md:flex flex-col justify-center items-center md:w-[40%] md:h-[80%] mb-10 md:border md:border-solid md:p-4 rounded-lg md:shadow-xl">
+        <div className="md:flex w-full h-[90%] justify-center items-center gap-6">
+            <section className="md:flex flex-col justify-center items-center md:w-[40%] md:h-[95%] md:mb-10 md:border md:border-solid md:p-4 rounded-lg md:shadow-xl">
                 <div className="md:flex w-full h-[30%] box bg-[#3a38ca]"></div>
                 <div className="flex w-full md:h-[60%] h-[10%] justify-center my-2">
                     <img

@@ -15,15 +15,10 @@ const DashboardPage = () => {
     };
 
     return (
-        <div
-            className={`w-full h-screen overflow-hidden ${
-                showMenu ? 'flex' : ''
-            } font-imprima bg-white`}
-        >
-            {/* TODO: Arreglar problemas con las medidas  */}
-            <div className="w-[15%] md:w-[10%] h-full bg-white">
-                <div className="md:flex">
-                    <div className="bg-white md:hidden">
+        <div className={`flex ${!showMenu ? "flex-col" : ""} w-full h-screen font-imprima bg-white`}>
+            <div className={`w-[15%] md:h-full md:flex bg-white ${showMenu ? "h-full" : "h-[5%]"}`} >
+                <div className={`md:flex ${showMenu ? "h-full" : "h-[5%]"}`} >
+                    <div className='bg-white md:hidden h-[5%]'>
                         <button onClick={handleMenu}>
                             <img
                                 src={showMenu ? ArrowLeftIcon : ArrowIcon}
@@ -38,7 +33,7 @@ const DashboardPage = () => {
             <div
                 className={`${
                     showMenu ? 'w-[85%]' : 'w-full'
-                } h-screen px-5 pt-10 mx-auto`}
+                } h-full px-5 mx-auto pt-10 overflow-y-scroll`}
             >
                 <Outlet />
             </div>

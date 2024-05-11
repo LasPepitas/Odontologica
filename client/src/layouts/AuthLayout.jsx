@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { authGoogle } from '../services/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../store/slices/userSlice';
+
 const AuthLayout = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -21,8 +22,7 @@ const AuthLayout = ({ children }) => {
                     // Decodifica los datos del usuario desde base64 y conviértelos a objeto JavaScript
                     const usuario = JSON.parse(atob(usuarioCodificado));
                     const userData = await authGoogle(usuario);
-                    dispatch(setUser(userData.user));
-                    localStorage.setItem('token', userData.token);
+                    dispatch(setUser(userData));
                     if (userData.token) {
                         navigate('/dashboard');
                     }

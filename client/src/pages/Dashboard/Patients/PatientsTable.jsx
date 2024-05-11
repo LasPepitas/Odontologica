@@ -1,6 +1,3 @@
-import ModalPatients from './ModalPatient';
-import { useEffect, useState } from 'react';
-import { getAppointmentsByDentist } from '../../../services';
 import './patients.css';
 const patients = [
     {
@@ -54,23 +51,8 @@ const patients = [
     },
 ];
 const PatientsTable = () => {
-    const [modalOpen, setModalOpen] = useState(false);
-    const [selectedPatient, setSelectedPatient] = useState(null);
-    useEffect(() => {
-        const fetchAppointments = async () => {
-            const appointments = await getAppointmentsByDentist(1);
-            console.log(appointments);
-        };
-        fetchAppointments();
-    }, []);
     return (
         <section className="w-full h-full px-4 py-3 bg-white rounded-lg">
-            {modalOpen && (
-                <ModalPatients
-                    patient={selectedPatient}
-                    onClose={() => setModalOpen(false)}
-                />
-            )}
             <h2 className="font-extrabold text-3xl mb-8">Pacientes</h2>
             <table className="w-full rounded-lg  ">
                 <thead className="font-bold text-left text-xl bg-calypso-50 text-calypso-700">
@@ -123,14 +105,8 @@ const PatientsTable = () => {
                                 {patient.status}
                             </td>
                             <td className="font-bold gap-x-2 table-cell py-2">
-                                <button
-                                    className="bg-green-400 text-white px-2 py-1 rounded-md"
-                                    onClick={() => {
-                                        setSelectedPatient(patient);
-                                        setModalOpen(true);
-                                    }}
-                                >
-                                    Ver
+                                <button className="bg-green-400 text-white px-2 py-1 rounded-md">
+                                    Editar
                                 </button>
                                 <button className="bg-red-400 text-white px-2 py-1 rounded-md ml-3">
                                     Eliminar

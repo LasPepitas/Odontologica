@@ -11,7 +11,7 @@ const PerfilPage = () => {
     const { user: userGoogle, isAuthenticated, isLoading } = useAuth0();
     const [consultasDetalles, SetConsultasDetalles] = useState([]);
 
-    console.log(user.id);
+    console.log(user.id)
 
     useEffect(() => {
         const obtenerDatos = async () => {
@@ -42,7 +42,7 @@ const PerfilPage = () => {
                     />
                 </div>
                 <p className="hidden md:flex md:relative md:-top-[10%] text-2xl">
-                    Hola {user?.name} !!
+                    Hola {user.name} !!
                 </p>
                 <div className="w-full h-[10%] flex flex-row  justify-center items-center md:hover:cursor-pointer">
                     <p className="text-center">Editar perfil</p>
@@ -59,7 +59,7 @@ const PerfilPage = () => {
                             type="text"
                             id="nombre"
                             className="w-[80%] md:w-[40%] text-black rounded-lg px-3 border-solid border"
-                            placeholder={user?.name}
+                            placeholder={user.name}
                             disabled
                         />
                     </div>
@@ -69,7 +69,7 @@ const PerfilPage = () => {
                             type="text"
                             id="nombre"
                             className="w-[80%] md:w-[40%] rounded-lg px-3 border-solid border"
-                            placeholder={user?.name}
+                            placeholder={user.email}
                             disabled
                         />
                     </div>

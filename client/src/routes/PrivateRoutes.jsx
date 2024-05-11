@@ -1,34 +1,9 @@
-import { useNavigate, Outlet } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getProfile } from '../services';
-import { useEffect, useState } from 'react';
-import { setUser } from '../store/slices/userSlice';
-import LoaderSignal from '../components/loaderSignal/LoaderSignal';
+import { Navigate, Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const PrivateRoutes = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const [isAuth, setIsAuth] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
-    useEffect(() => {
-        const fetchProfile = async () => {
-            const profile = await getProfile();
-            console.log('estado de autenticación:', profile);
-            if (!profile) {
-                setIsAuth(false);
-                setIsLoading(false);
-                navigate('/login');
-                return;
-            }
-            dispatch(setUser(profile));
-            setIsAuth(true);
-            setIsLoading(false);
-        };
-        fetchProfile();
-    }, [dispatch, isAuth]);
-    if (!isAuth) navigate('/login');
-    console.log('Autenticado: ', isAuth);
-    console.log('loading: ', isLoading);
-    return <>{isLoading && !isAuth ? <LoaderSignal /> : <Outlet />}</>;
+    const { user } = useSelector((state) => state.user);
+    const isAuth = user; // TODO: Change this to your auth logic
+    return <section>{isAuth ? <Outlet /> : <Navigate to="/login" />}</section>;
 };
 
 export default PrivateRoutes;

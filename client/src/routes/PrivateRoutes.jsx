@@ -27,7 +27,7 @@ const PrivateRoutes = () => {
     }, [dispatch, isAuth]);
     if (!isAuth) navigate('/login');
     console.log('Autenticado: ', isAuth);
-    console.log('loading: ', isLoading);
+    console.log('Cargando: ', isLoading);
     return <>{isLoading && !isAuth ? <LoaderSignal /> : <Outlet />}</>;
 };
 

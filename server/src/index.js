@@ -4,9 +4,9 @@ import sequelize from './config/database.js';
 import { swaggerDocs } from './docs/config.js';
 app.listen(3000, async () => {
     try {
-        await sequelize.sync({
-            force: true,
-        }); // No ejecutar en producción
+        // await sequelize.sync({
+        //     force: true,
+        // }); // No ejecutar en producción
         await sequelize.authenticate();
         console.log('Database connected');
     } catch (error) {

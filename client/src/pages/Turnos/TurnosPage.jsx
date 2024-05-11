@@ -100,7 +100,7 @@ const TurnosPage = () => {
                                         {registro.hora}
                                     </td>
                                     <td 
-                                        className={`w-[25%] border px-4 py-2 text-center overflow-scroll md:overflow-hidden ${registro.estado === "ocupado" ? "text-red-600" : "text-green-500"}`}
+                                        className={`w-[25%] border px-4 py-2 text-center overflow-scroll md:overflow-hidden font-bold ${registro.estado === "ocupado" ? "text-red-600" : "text-green-500"}`}
                                     >
                                         {registro.estado}
                                     </td>

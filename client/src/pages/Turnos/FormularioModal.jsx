@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const FormularioModal = ({ open, onClose, children }) => {
     const { user } = useSelector((state) => state.user);
@@ -80,13 +81,15 @@ const FormularioModal = ({ open, onClose, children }) => {
                         <label htmlFor="descripcion" className="mb-2">Descripción</label>
                         <textarea id="descripcion" className="h-28 border rounded-md px-3 py-2 resize-none overflow-auto"></textarea>
 
-                        <div className="w-full flex justify-center my-2">
-                            <button
-                                className='w-2/3 bg-[#636ff1] text-white my-2 px-4 py-2  hover:cursor-pointer overflow-auto'
-                                type="submit"
-                            >
-                                Pagar Reservacion
-                            </button>
+                        <div className="w-full flex justify-center my-2 items-center content-center mx-auto">
+                            <Link to='/pagos' className="flex justify-center">
+                                <button
+                                    className='w-2/3 bg-[#636ff1] text-white my-2 px-4 py-2 hover:cursor-pointer overflow-auto rounded-lg'
+                                    type="submit"
+                                >
+                                    Pagar Reservacion
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </form>

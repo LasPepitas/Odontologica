@@ -7,7 +7,6 @@ import { Outlet } from 'react-router-dom';
 import { ArrowIcon, ArrowLeftIcon } from '../../assets/icons';
 
 const DashboardPage = () => {
-    const { user } = useSelector((state) => state.user);
     const [showMenu, SetShowMenu] = useState(true);
 
     const handleMenu = () => {
@@ -15,10 +14,18 @@ const DashboardPage = () => {
     };
 
     return (
-        <div className={`flex ${!showMenu ? "flex-col" : ""} w-full h-screen font-imprima bg-white`}>
-            <div className={`w-[15%] md:h-full md:flex bg-white ${showMenu ? "h-full" : "h-[5%]"}`} >
-                <div className={`md:flex ${showMenu ? "h-full" : "h-[5%]"}`} >
-                    <div className='bg-white md:hidden h-[5%]'>
+        <div
+            className={`flex ${
+                !showMenu ? 'flex-col' : ''
+            } w-full h-screen font-imprima bg-white`}
+        >
+            <div
+                className={`w-[15%] md:h-full md:flex bg-white ${
+                    showMenu ? 'h-full' : 'h-[5%]'
+                }`}
+            >
+                <div className={`md:flex ${showMenu ? 'h-full' : 'h-[5%]'}`}>
+                    <div className="bg-white md:hidden h-[5%]">
                         <button onClick={handleMenu}>
                             <img
                                 src={showMenu ? ArrowLeftIcon : ArrowIcon}

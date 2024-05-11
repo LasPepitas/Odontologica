@@ -1,3 +1,4 @@
-import { register, login, authGoogle } from './auth';
+import { register, login, authGoogle, getProfile } from './auth';
+import { getAppointmentsByDentist } from './appointments';
 
-export { register, login, authGoogle };
+export { register, login, authGoogle, getProfile, getAppointmentsByDentist };

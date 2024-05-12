@@ -1,63 +1,40 @@
-const API_SERVER_KEY =
-    'BNDbZ4avweY3XU7n7d0P_KEqVFSFiI4LRk5IthArN3vAtazIP416Rs6lyeGELbm6OXeq7A4Q-5JGhyEYZJbBm3c';
+const submitForm = (e) => {
+    e.preventDefault();
+    const amount = document.getElementById('amount').value;
+    const date = document.getElementById('date').value;
+    const description = document.getElementById('description').value;
+    const duration = document.getElementById('duration').value;
+    const id_dentist = document.getElementById('id_dentist').value;
+    const id_treatment = document.getElementById('id_treatment').value;
+    const id_user = document.getElementById('id_user').value;
+    const image = document.getElementById('image').value;
 
-function urlBase64ToUint8Array(base64String) {
-    const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
-    const base64 = (base64String + padding)
-        .replace(/-/g, '+')
-        .replace(/_/g, '/');
+    const data = {
+        amount,
+        date,
+        description,
+        duration,
+        id_dentist,
+        id_treatment,
+        id_user,
+        image,
+    };
 
-    const rawData = window.atob(base64);
-    const outputArray = new Uint8Array(rawData.length);
-
-    for (let i = 0; i < rawData.length; ++i) {
-        outputArray[i] = rawData.charCodeAt(i);
-    }
-    return outputArray;
-}
-
-const suscription = async () => {
-    const register = await navigator.serviceWorker.register('./worker.js', {
-        scope: '/test/',
-    });
-    console.log('New Service Worker created');
-
-    console.log('Registering push');
-    const subscriptionData = await register.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(API_SERVER_KEY),
-    });
-
-    console.log('SUB --->', subscriptionData);
-
-    await fetch('http://localhost:3000/api/v1/notifications/subscribe', {
+    fetch('https://odontologica.onrender.com/api/v1/appointments', {
         method: 'POST',
-        body: JSON.stringify(subscriptionData),
         headers: {
             'Content-Type': 'application/json',
         },
-    });
+        body: JSON.stringify(data),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 };
 
-console.log('<------ APP ----->');
-if ('serviceWorker' in navigator) {
-    console.log('Service Worker is supported');
-}
-suscription();
-
-const $btnSendNotification = document.getElementById('send-not');
-
-$btnSendNotification.addEventListener('click', async () => {
-    const message = document.getElementById('notification-message').value;
-    await fetch(
-        'http://localhost:3000/api/v1/notifications/send-notification',
-        {
-            method: 'POST',
-            body: JSON.stringify({ message }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        },
-    );
-    console.log('Notification sent');
-});
+const button = document.getElementById('submit');
+button.addEventListener('click', submitForm);

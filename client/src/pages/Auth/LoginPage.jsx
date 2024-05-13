@@ -33,8 +33,9 @@ const LoginPage = () => {
 
     setIsLoading(true);
     try {
-      const { user } = await login({ email, password });
+      const { user, token } = await login({ email, password });
       dispatch(setUser(user));
+      localStorage.setItem('token', token);
       setIsLoading(false);
       toast.success("¡Inicio de sesión exitoso!");
       navigate("/dashboard");

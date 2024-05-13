@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 
 export default function Header() {
   return (
@@ -20,10 +21,10 @@ export default function Header() {
                 <li>
                   <a
                     className="text-black transition hover:text-[#0c8fae]"
-                    href="#"
+                    href="/dasboard"
                   >
                     {" "}
-                    Home{" "}
+                    Login{" "}
                   </a>
                 </li>
 
@@ -62,12 +63,12 @@ export default function Header() {
 
           <div className="flex items-center gap-4">
             <div className="sm:flex sm:gap-4">
-              <a
+              <Link 
                 className="rounded-md bg-[#636ff1] px-5 py-2.5 text-sm font-medium text-white shadow"
-                href="#"
+                to="/dashboard" 
               >
-                Home
-              </a>
+                Login
+              </Link>
             </div>
           </div>
         </div>

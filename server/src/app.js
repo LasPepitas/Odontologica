@@ -8,6 +8,7 @@ import GoogleRoutes from './routes/google.routes.js';
 import AppointmentRoutes from './routes/appointment.routes.js';
 import UserRoutes from './routes/user.routes.js';
 import NotificationRoutes from './routes/notification.routes.js';
+import MedicalHistoryRoutes from './routes/medicalHistory.routes.js';
 import './models/relations.js';
 
 const config = {
@@ -53,5 +54,6 @@ app.use('/api/v1/auth', AuthRoutes);
 app.use('/api/v1/appointments', AppointmentRoutes);
 app.use('/api/v1/users', UserRoutes);
 app.use('/api/v1/notifications', NotificationRoutes);
+app.use('/api/v1/medicalHistories', MedicalHistoryRoutes);
 
 export default app;

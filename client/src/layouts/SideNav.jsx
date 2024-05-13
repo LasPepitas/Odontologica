@@ -21,11 +21,12 @@ const SideNav = ({showMenu}) => {
                         <Options/>
                     </div>
                     <button className='hidden md:flex h-[10%]' onClick={handleOut}>
+                        <Link to='/login' className='text-white md:flex flex-row'>
                         <img
                             src={OutIcon}
                             alt="consulta icono"
                             className="size-7 mx-3"
-                        /><Link to='/login' className='text-white'>Salir</Link>
+                        />Salir</Link>
                     </button>
                     <button className='flex h-[10%] md:hidden' onClick={handleOut}>
                         <Link to='/login'><img

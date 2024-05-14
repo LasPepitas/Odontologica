@@ -62,3 +62,7 @@ input {
 .input-form-auth-container ::placeholder {
   color: #a19f9f;
 }
+
+.times-schedule {
+  @apply text-gray-800 border border-gray-200 flex items-center justify-center font-bold;
+}

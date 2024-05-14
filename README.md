@@ -1,4 +1,4 @@
-# Odontologico
+![image](https://github.com/LasPepitas/Odontologica/assets/105571999/cbeb49fd-cc77-4037-a0dd-9cd6188e1cee)# Odontologico
 
 <div>
     <div align='center'>

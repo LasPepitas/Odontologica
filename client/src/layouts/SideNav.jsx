@@ -1,23 +1,41 @@
+import { OutIcon, ToothIcon } from '../assets/icons';
 import Options from './Options'
+import { Link } from 'react-router-dom';
 
-const SideNav = ({ name }) => {
+const SideNav = ({showMenu}) => {
+
+    const handleOut = () =>{
+        localStorage.clear();
+    }
+
     return (
-        <div className="w-full h-full  justify-center items-center p-12">
-            <div className="w-full md:max-w-xs h-full border bg-white rounded-[35px] shadow-2xl p-4">
-                <div className='w-full h-[60%] px-4 my-6'>
-                    <div className='flex w-full h-1/4 bg-[#D9D9D9] text-[25px] rounded-[35px] items-center justify-center overflow-auto'>
-                        NOMBRE EMPRESA
+        <div className={`md:flex-col md:h-full ${!showMenu ? "hidden" : "flex h-[95%]"}`}>
+            {showMenu ? 
+                (<div className=" flex flex-col text-white w-full h-full justify-center items-center bg-[#3a38ca]">
+                    <img
+                        src={ToothIcon}
+                        alt="diente icono"
+                        className="size-7 mx-3 h-[20%]"
+                    />
+                    <div className='h-[70%]'>
+                        <Options/>
                     </div>
-                    <div className='flex w-full h-1/2 items-center justify-center my-2'>
-                        <img src="ruta_de_la_imagen" alt="PERFIL" className="rounded-full h-40 w-40 object-cover bg-[#D9D9D9]" />
-                    </div>
-                    <div className='flex w-full h-1/4 items-center justify-center bg-[#D9D9D9] text-[25px] rounded-[35px]'>
-                        {name}
-                    </div>
-                </div>
-                <hr className="w-[90%] border-t-2 border-gray-300 mx-auto my-1"/>
-                <Options />
-            </div>
+                    <button className='hidden md:flex h-[10%]' onClick={handleOut}>
+                        <Link to='/login' className='text-white md:flex flex-row'>
+                        <img
+                            src={OutIcon}
+                            alt="consulta icono"
+                            className="size-7 mx-3"
+                        />Salir</Link>
+                    </button>
+                    <button className='flex h-[10%] md:hidden' onClick={handleOut}>
+                        <Link to='/login'><img
+                            src={OutIcon}
+                            alt="consulta icono"
+                            className="size-7 mx-3"
+                        /></Link>
+                    </button>
+                </div>) : null}
         </div>
     );
 }

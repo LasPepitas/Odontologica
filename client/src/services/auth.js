@@ -45,3 +45,16 @@ export const registerWithGoogle = async (user) => {
         return Promise.reject(error);
     }
 };
+
+export const getProfile = async (token) => {
+    try {
+        const response = await api.get('/auth/profile', {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        return null;
+    }
+};

@@ -7,6 +7,11 @@ import Header from "../components/Header";
 import LandigPage from "../pages/Landing/LandigPage";
 import TurnosPage from "../pages/Turnos/TurnosPage";
 import ConsultasPage from "../pages/Consultas/ConsultasPage";
+import Hero from "../components/Hero";
+import Service from "../components/Service";
+import Horario from "../components/Horario";
+import Comentario from "../components/Comentario";
+import Formulario from "../components/Formulario";
 
 export const router = createBrowserRouter([
   {

@@ -114,7 +114,7 @@ AppointmentService.delete = async (id) => {
 
 AppointmentService.findAllByDentist = async (id) => {
     const appointments = await sequelize.query(
-        'SELECT id_user, status, date, duration, payment, u.name as user_name, u.email as user_email, u.lastname as user_lastname FROM appointments a JOIN users u ON a.id_user = u.id WHERE a.id_dentist = :id',
+        'SELECT id_user, status, date, duration, u.name as user_name, u.email as user_email, u.lastname as user_lastname FROM appointments a JOIN users u ON a.id_user = u.id WHERE a.id_dentist = :id',
         {
             replacements: { id },
             type: sequelize.QueryTypes.SELECT,
@@ -133,6 +133,65 @@ AppointmentService.findAllByUser = async (id) => {
     });
 
     return appointments;
+};
+
+AppointmentService.updateStatus = async (id, status) => {
+    const appointment = await Appointment.findByPk(id);
+    if (!appointment) {
+        throw new Error('Appointment not found');
+    }
+    const updatedAppointment = await Appointment.update(
+        { status },
+        { where: { id } },
+    );
+
+    return {
+        message: 'Appointment updated',
+        updatedAppointment,
+    };
+};
+AppointmentService.getAppointmentInfo = async (id) => {
+    const appointment = await Appointment.findByPk(id, {
+        include: [
+            {
+                model: User,
+                attributes: ['name', 'lastname', 'email', 'phone'],
+            },
+            {
+                model: Payment,
+                attributes: [
+                    'amount',
+                    'payment_method',
+                    'payment_receipt_image',
+                ],
+            },
+        ],
+    });
+    if (!appointment) {
+        throw new Error('Appointment not found');
+    }
+
+    const paymentAppointment = Payment.findByPk(appointment.id_payment);
+
+    return {
+        appointment,
+        paymentAppointment,
+    };
+};
+
+AppointmentService.updatePayment = async (id, payment) => {
+    const appointment = await Appointment.findByPk(id);
+    if (!appointment) {
+        throw new Error('Appointment not found');
+    }
+    const updatedPayment = await Payment.update(payment, {
+        where: { id: appointment.id_payment },
+    });
+
+    return {
+        message: 'Payment updated',
+        updatedPayment,
+    };
 };
 
 export default AppointmentService;

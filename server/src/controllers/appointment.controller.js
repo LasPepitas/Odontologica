@@ -74,4 +74,39 @@ Appointment.findAllByUser = async (req, res) => {
     }
 };
 
+Appointment.updateStatus = async (req, res) => {
+    try {
+        const appointment = await AppointmentService.updateStatus(
+            req.params.id,
+            req.body.status,
+        );
+        res.status(200).json(appointment);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+Appointment.getAppointmentInfo = async (req, res) => {
+    try {
+        const completedInfo = await AppointmentService.getAppointmentInfo(
+            req.params.id,
+        );
+        res.status(200).json(completedInfo);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+Appointment.updatePayment = async (req, res) => {
+    try {
+        const appointment = await AppointmentService.updatePayment(
+            req.params.id,
+            req.body.payment,
+        );
+        res.status(200).json(appointment);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 export default Appointment;

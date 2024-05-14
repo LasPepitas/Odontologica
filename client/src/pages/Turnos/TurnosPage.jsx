@@ -100,9 +100,18 @@ const TurnosPage = () => {
                                         {registro.hora}
                                     </td>
                                     <td 
-                                        className={`w-[25%] border px-4 py-2 text-center overflow-scroll md:overflow-hidden font-bold ${registro.estado === "ocupado" ? "text-red-600" : "text-green-500"}`}
+                                        className={`w-[25%] flex border px-4 py-2 text-center md:overflow-hidden md:font-bold 
+                                        ${registro.estado === "ocupado" ? "text-red-600" : "text-green-500"} justify-center`}
                                     >
-                                        {registro.estado}
+                                        <span className={`${registro.estado === "disponible" ? "flex" : "hidden"} md:hidden`}>
+                                            🟢
+                                        </span>
+                                        <span className={`${registro.estado === "ocupado" ? "flex" : "hidden"}  md:hidden`}>
+                                            🔴
+                                        </span>
+                                        <span className={`md:flex hidden`}>
+                                            {registro.estado}
+                                        </span>
                                     </td>
                                     <td className="w-[25%] border px-4 py-2 flex justify-center">
                                         <button

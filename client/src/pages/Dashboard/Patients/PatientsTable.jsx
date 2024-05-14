@@ -40,14 +40,13 @@ const PatientsTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {appointments.map(
+                    {appointments?.map(
                         ({
                             id,
                             id_user,
                             user_name,
                             user_lastName,
-                            user_email,
-                            status,
+                            user_email
                         }) => (
                             <tr
                                 key={id}
@@ -74,12 +73,10 @@ const PatientsTable = () => {
                                 <td
                                     data-title="Estado:"
                                     className={` font-bold table-cell py-2
-                                ${status === 'completed' && 'text-green-600'}
-                                ${status === 'pending' && 'text-yellow-500'}
-                                ${status === 'cancelled' && 'text-red-600'}
+                                
                             `}
                                 >
-                                    {statusVariants[status]}
+                                    {statusVariants["ped"]}
                                 </td>
                                 <td className="font-bold gap-x-2 table-cell py-2">
                                     <button
@@ -90,7 +87,6 @@ const PatientsTable = () => {
                                                 user_name,
                                                 user_lastName,
                                                 user_email,
-                                                status,
                                                 id_appointment: id,
                                             });
                                             setModalOpen(true);

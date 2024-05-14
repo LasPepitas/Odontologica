@@ -71,7 +71,7 @@ export default function Service() {
   ];
 
   return (
-    <div className="bg-white pb-10">
+    <div className="bg-white pb-10" id="service">
       <div className="container mx-auto py-12">
         <div className="container mx-auto py-8">
           <h2 className="text-2xl font-bold mb-12 text-center text-gray-900">

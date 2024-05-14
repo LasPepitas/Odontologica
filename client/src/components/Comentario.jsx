@@ -2,7 +2,10 @@ import React from "react";
 
 export default function Comentario() {
   return (
-    <div className="bg-white p-4 md:p-8 md:py-[8rem] rounded-lg shadow-lg">
+    <div
+      className="bg-white p-4 md:p-8 md:py-[8rem] rounded-lg shadow-lg"
+      id="comentario"
+    >
       <h2 className="text-2xl font-semibold mb-4">Comentarios de Usuarios</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <ComentarioItem
@@ -21,7 +24,7 @@ export default function Comentario() {
           nombre="Rene Topson Chelsea Harrington"
           calificacion={4}
           comentario="Tengo la suerte de tener muchos médicos excelentes en mi familia y entre mis amigos."
-          fotoUrl="https://www.redaccionmedica.com/images/destacados/las-personas-con-un-riesgo-genetico-bajo-de-tdah-son-mas-afortunadas--2868.jpg"
+          fotoUrl="https://userpic.codeforces.org/3541583/title/5479f16d18c204ee.jpg"
         />
         <ComentarioItem
           nombre="Emma Johnston"

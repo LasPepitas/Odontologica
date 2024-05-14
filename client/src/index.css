@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Imprima&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Imprima&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,26 +6,28 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f7f7f7;
+  font-family: "Roboto", sans-serif;
+  background-color: #f7f7f7;
 }
 
 li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 a {
-    text-decoration: none;
-    color: #333;
+  text-decoration: none;
+  color: #333;
 }
 
 button {
-    font-family: 'Roboto', sans-serif;
-    cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
 }
 
 /* padding 0 elements */
@@ -44,23 +46,23 @@ input,
 label,
 li,
 span {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 input {
-    border: none;
-    outline: none;
+  border: none;
+  outline: none;
 }
 
 .input-form-auth-container {
-    @apply flex justify-between items-center border-b-[4px] py-1 px-4 border-blue-700 rounded w-full text-gray-400  ring-transparent relative gap-x-2;
+  @apply flex justify-between items-center border-b-[4px] py-1 px-4 border-blue-700 rounded w-full text-gray-400  ring-transparent relative gap-x-2;
 }
 
 .input-form-auth-container ::placeholder {
-    color: #a19f9f;
+  color: #a19f9f;
 }
 
 .times-schedule {
-    @apply text-gray-800 border border-gray-200 flex items-center justify-center font-bold;
+  @apply text-gray-800 border border-gray-200 flex items-center justify-center font-bold;
 }

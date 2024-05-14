@@ -1,13 +1,13 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ data }) {
   return (
-    <header className="bg-white">
-      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+    <header className="bg-white fixed w-full">
+      <div className="mx-auhref max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="md:flex md:items-center md:gap-12">
-            {/* URL link con imagen */}
+            {/* URL a con imagen */}
             <img
               className="h-12"
               src="https://seeklogo.com/images/F/family-dental-healt-logo-CF68B43664-seeklogo.com.png"
@@ -20,41 +20,46 @@ export default function Header() {
               <ul className="flex items-center gap-6 text-lg">
                 <li>
                   <a
+                    href="#hero"
                     className="text-black transition hover:text-[#0c8fae]"
-                    href="/dasboard"
                   >
                     {" "}
-                    Login{" "}
+                    Inicio{" "}
                   </a>
                 </li>
 
                 <li>
                   <a
+                    href="#service"
                     className="text-black transition hover:text-[#0c8fae]"
-                    href="#"
                   >
-                    {" "}
-                    Doctores{" "}
+                    Service
                   </a>
                 </li>
 
                 <li>
                   <a
+                    href="#horario"
                     className="text-black transition hover:text-[#0c8fae]"
-                    href="#"
                   >
-                    {" "}
-                    Servicios{" "}
+                    Horario
                   </a>
                 </li>
 
                 <li>
                   <a
+                    href="#comentario"
                     className="text-black transition hover:text-[#0c8fae]"
-                    href="#"
                   >
-                    {" "}
-                    Contacto{" "}
+                    Comentario
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#formulario"
+                    className="text-black transition hover:text-[#0c8fae]"
+                  >
+                    Formulario
                   </a>
                 </li>
               </ul>
@@ -63,9 +68,9 @@ export default function Header() {
 
           <div className="flex items-center gap-4">
             <div className="sm:flex sm:gap-4">
-              <Link 
+              <Link
                 className="rounded-md bg-[#636ff1] px-5 py-2.5 text-sm font-medium text-white shadow"
-                to="/dashboard" 
+                to="/dashboard"
               >
                 Login
               </Link>

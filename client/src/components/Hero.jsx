@@ -5,11 +5,11 @@ const background =
 const header = "Una clínica confiable \npara todas sus necesidades dentales";
 const subheader =
   "Sonrisas Radiantes, Cuidado Excepcional: \nTu Odontología de Confianza.";
-const button = "+51 000-158-189";
+const button = "Agendar cita";
 
 function Hero() {
   return (
-    <div style={{ backgroundColor: "#2e3081" }} className="mb-10">
+    <div style={{ backgroundColor: "#2e3081" }} className="mb-10" id="hero">
       <div className="container max-w-screen-xl mx-auto flex justify-center items-center min-h-screen">
         <div className="grid md:grid-cols-12">
           <div className="col-span-6 place-self-center">

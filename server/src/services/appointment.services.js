@@ -135,4 +135,46 @@ AppointmentService.findAllByUser = async (id) => {
     return appointments;
 };
 
+AppointmentService.updateStatus = async (id, status) => {
+    const appointment = await Appointment.findByPk(id);
+    if (!appointment) {
+        throw new Error('Appointment not found');
+    }
+    const updatedAppointment = await Appointment.update(
+        { status },
+        { where: { id } },
+    );
+
+    return {
+        message: 'Appointment updated',
+        updatedAppointment,
+    };
+};
+AppointmentService.getAppointmentInfo = async (id) => {
+    const appointment = await Appointment.findByPk(id);
+    if (!appointment) {
+        throw new Error('Appointment not found');
+    }
+    const paymentAppointment = await Payment.findByPk(appointment.id_payment);
+    return {
+        appointment,
+        paymentAppointment,
+    };
+};
+
+AppointmentService.updatePayment = async (id, payment) => {
+    const appointment = await Appointment.findByPk(id);
+    if (!appointment) {
+        throw new Error('Appointment not found');
+    }
+    const updatedPayment = await Payment.update(payment, {
+        where: { id: appointment.id_payment },
+    });
+
+    return {
+        message: 'Payment updated',
+        updatedPayment,
+    };
+};
+
 export default AppointmentService;

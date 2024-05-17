@@ -12,7 +12,7 @@ AuthService.login = async (email, password) => {
     if (!isCorrect) {
         throw new Error('Invalid credentials');
     }
-    const token = createToken({ id: user.id });
+    const token = createToken({ id: user.id, role: user.role });
     console.log(user);
     return {
         user: {

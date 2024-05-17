@@ -114,7 +114,7 @@ AppointmentService.delete = async (id) => {
 
 AppointmentService.findAllByDentist = async (id) => {
     const appointments = await sequelize.query(
-        'SELECT id_user, status, date, duration, u.name as user_name, u.email as user_email, u.lastname as user_lastname FROM appointments a JOIN users u ON a.id_user = u.id WHERE a.id_dentist = :id',
+        'SELECT a.id, id_user, status, date, duration, u.name as user_name, u.email as user_email, u.lastname as user_lastname FROM appointments a JOIN users u ON a.id_user = u.id WHERE a.id_dentist = :id',
         {
             replacements: { id },
             type: sequelize.QueryTypes.SELECT,

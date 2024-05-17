@@ -20,6 +20,7 @@ const PatientsTable = () => {
         };
         fetchAppointments();
     }, []);
+    console.log(appointments);
     return (
         <section className="w-full h-full px-4 py-3 bg-white rounded-lg">
             {modalOpen && (
@@ -46,7 +47,7 @@ const PatientsTable = () => {
                             id_user,
                             user_name,
                             user_lastName,
-                            user_email
+                            user_email,
                         }) => (
                             <tr
                                 key={id}
@@ -76,7 +77,7 @@ const PatientsTable = () => {
                                 
                             `}
                                 >
-                                    {statusVariants["ped"]}
+                                    {statusVariants['ped']}
                                 </td>
                                 <td className="font-bold gap-x-2 table-cell py-2">
                                     <button

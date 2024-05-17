@@ -8,6 +8,7 @@ const ModalPatient = ({ patient, onClose }) => {
             onClose();
         }
     };
+    console.log(patient);
     return (
         <div
             className="fixed left-0 top-0 h-screen w-screen flex justify-center items-center bg-slate-600/40 px-5"

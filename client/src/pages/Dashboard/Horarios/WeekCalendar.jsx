@@ -3,48 +3,19 @@ import { hours } from '../../../constants';
 import { getAppointmentsByDentist } from '../../../services/appointments';
 import { useEffect, useState } from 'react';
 import Modal from './Modal';
-const appointments = [
-    {
-        id: 4,
-        date: '2024-05-11',
-        start: '15:00',
-        end: '12:00',
-        description: 'Descripción de la cita 4',
-        user_name: 'Rene Ramirez',
-        treatment_name: 'Ortodoncia',
-    },
-    {
-        id: 5,
-        date: '2024-05-09',
-        start: '11:00',
-        end: '12:00',
-        description: 'Descripción de la cita 5',
-        user_name: 'Juan Perez',
-        treatment_name: 'Cirugía',
-    },
-    {
-        id: 6,
-        date: '2024-05-10',
-        start: '14:00',
-        end: '12:00',
-        description: 'Descripción de la cita 6',
-        user_name: 'Maria Lopez',
-        treatment_name: 'Ortodoncia',
-    },
-];
 
 const WeekCalendar = () => {
-    // const [appointments, setAppointments] = useState([]);
-    // const [loading, setLoading] = useState(false);
-    // useEffect(() => {
-    //     const fetchAppointments = async () => {
-    //         setLoading(true);
-    //         const appointments = await getAppointmentsByDentist(1);
-    //         setAppointments(appointments);
-    //         setLoading(false);
-    //     };
-    //     fetchAppointments();
-    // }, []);
+    const [appointments, setAppointments] = useState([]);
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        const fetchAppointments = async () => {
+            setLoading(true);
+            const appointments = await getAppointmentsByDentist(1);
+            setAppointments(appointments);
+            setLoading(false);
+        };
+        fetchAppointments();
+    }, []);
     const [modalData, setModalData] = useState({});
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOpenModal = (data) => {
@@ -92,10 +63,32 @@ const WeekCalendar = () => {
                                     className="border border-gray-200"
                                 >
                                     {appointments.map((appointment) => {
+                                        const appointmentDate = new Date(
+                                            appointment.date,
+                                        );
+                                        const appointmentDay =
+                                            appointmentDate.toLocaleDateString(
+                                                'es-PE',
+                                                {
+                                                    timeZone: 'America/Lima',
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: 'numeric',
+                                                },
+                                            );
+                                        const appointmentHour =
+                                            appointmentDate.toLocaleTimeString(
+                                                'es-PE',
+                                                {
+                                                    hour: '2-digit',
+                                                    minute: '2-digit',
+                                                },
+                                            );
+
                                         if (
-                                            day.format('YYYY-MM-DD') ===
-                                                appointment.date &&
-                                            hour === appointment.start
+                                            day.format('DD/MM/YYYY') ==
+                                                appointmentDay &&
+                                            hour == appointmentHour
                                         ) {
                                             return (
                                                 <button

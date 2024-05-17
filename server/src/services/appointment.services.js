@@ -151,28 +151,11 @@ AppointmentService.updateStatus = async (id, status) => {
     };
 };
 AppointmentService.getAppointmentInfo = async (id) => {
-    const appointment = await Appointment.findByPk(id, {
-        include: [
-            {
-                model: User,
-                attributes: ['name', 'lastname', 'email', 'phone'],
-            },
-            {
-                model: Payment,
-                attributes: [
-                    'amount',
-                    'payment_method',
-                    'payment_receipt_image',
-                ],
-            },
-        ],
-    });
+    const appointment = await Appointment.findByPk(id);
     if (!appointment) {
         throw new Error('Appointment not found');
     }
-
-    const paymentAppointment = Payment.findByPk(appointment.id_payment);
-
+    const paymentAppointment = await Payment.findByPk(appointment.id_payment);
     return {
         appointment,
         paymentAppointment,

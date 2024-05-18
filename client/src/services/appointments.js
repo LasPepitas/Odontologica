@@ -47,7 +47,7 @@ export const deleteAppointment = async (id) => {
 
 export const getAppointmentById = async (id) => {
     try {
-        const response = await api.get(`/appointments/${id}`);
+        const response = await api.get(`/appointments/info/${id}`);
         return response.data;
     } catch (error) {
         console.error(error);

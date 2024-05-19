@@ -20,7 +20,8 @@ const FormularioModal = ({ open, onClose, children }) => {
 
     useEffect(() => {
         if (children) {
-            const currentDate = `${children[0]}T${children[1]}:00.0Z`;
+            const currentDate = children;
+            console.log(currentDate)
             setBodyForm((prevForm) => ({
                 ...prevForm,
                 date: currentDate,
@@ -73,8 +74,8 @@ const FormularioModal = ({ open, onClose, children }) => {
                             onChange={(e) => setDescription(e.target.value)} 
                         required></textarea>
 
-                        <div className="w-full flex justify-center my-2 items-center content-center mx-auto">
-                            <Link to='/pagos'>
+                        <div className="w-full flex my-2">
+                            <Link to='/pagos' className="w-full flex justify-center">
                                 <button
                                     className='w-2/3 bg-[#636ff1] text-white my-2 px-4 py-2 hover:cursor-pointer overflow-auto rounded-lg'
                                     type="submit"

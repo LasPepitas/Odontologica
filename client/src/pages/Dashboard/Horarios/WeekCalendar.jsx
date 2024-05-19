@@ -90,6 +90,8 @@ const WeekCalendar = () => {
                                             hour,
                                             '=',
                                             appointmentHour,
+                                            ':',
+                                            hour == appointmentHour,
                                         );
                                         if (
                                             day.format('DD/MM/YYYY') ==

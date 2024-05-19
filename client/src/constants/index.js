@@ -5,8 +5,8 @@ export const navLinks = [
     { title: 'Contact', path: '/contact' },
 ];
 export const hours = [
-    '8:00',
-    '9:00',
+    '08:00',
+    '09:00',
     '10:00',
     '11:00',
     '14:00',

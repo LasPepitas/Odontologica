@@ -76,15 +76,21 @@ const WeekCalendar = () => {
                                                     year: 'numeric',
                                                 },
                                             );
-                                        const appointmentHour =
-                                            appointmentDate.toLocaleTimeString(
-                                                'es-PE',
-                                                {
-                                                    hour: '2-digit',
-                                                    minute: '2-digit',
-                                                },
-                                            );
-
+                                        const appointmentHour = appointmentDate
+                                            .toLocaleTimeString('es-PE', {
+                                                hour: '2-digit',
+                                                minute: '2-digit',
+                                            })
+                                            .split(' ')[0];
+                                        console.log(
+                                            day.format('DD/MM/YYYY'),
+                                            '=',
+                                            appointmentDay,
+                                            '--',
+                                            hour,
+                                            '=',
+                                            appointmentHour,
+                                        );
                                         if (
                                             day.format('DD/MM/YYYY') ==
                                                 appointmentDay &&

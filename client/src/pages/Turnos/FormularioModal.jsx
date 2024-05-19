@@ -21,9 +21,12 @@ const FormularioModal = ({ open, onClose, children }) => {
     useEffect(() => {
         if (children) {
             const currentDate = children;
+            
+            console.log(currentDate[0] + ' ' + currentDate[1])
+            
             setBodyForm((prevForm) => ({
                 ...prevForm,
-                date: currentDate,
+                date: currentDate[0] + ' ' + currentDate[1],
                 id_treatment: treatment.toString(),
                 description : description
             }));

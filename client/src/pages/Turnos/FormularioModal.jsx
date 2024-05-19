@@ -21,7 +21,6 @@ const FormularioModal = ({ open, onClose, children }) => {
     useEffect(() => {
         if (children) {
             const currentDate = children;
-            console.log(currentDate)
             setBodyForm((prevForm) => ({
                 ...prevForm,
                 date: currentDate,

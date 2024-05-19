@@ -28,6 +28,12 @@ AppointmentService.create = async (appointment, image = null) => {
         throw new Error('All fields are required for the appointment');
     }
 
+    const dateOccupied = await Appointment.findOne({
+        where: { date, id_dentist },
+    });
+    if (dateOccupied) {
+        throw new Error('Date is already occupied');
+    }
     let payment_receipt_image = null;
     if (image) {
         const { tempFilePath } = image;

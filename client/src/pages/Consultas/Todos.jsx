@@ -6,6 +6,9 @@ import Tablas from "./Tablas";
 function Todos({ isLoading, data }) {
     const [confirmada, setConfirmada] = useState([]);
     const [filterData, setFilterData] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectPacient, setSelectPatient] = useState(null);
+
 
     useEffect(() => {
         setFilterData(data);
@@ -15,12 +18,11 @@ function Todos({ isLoading, data }) {
         const addExtraFields = (filterData) => {
             return filterData.map(item => {
                 const { date } = item;
-                const [fecha, hora] = date.split('T');
-                const horaSinMilisegundos = hora.split('.')[0];
+                const [fecha, hora] = date.split(' ');
                 return {
                     ...item,
                     fecha,
-                    hora: horaSinMilisegundos
+                    hora: hora
                 };
             });
         };

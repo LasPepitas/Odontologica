@@ -22,7 +22,7 @@ const Options = () => {
                     >
                         <img
                             src={ProfileIcon}
-                            alt="cronograma icono"
+                            alt="cronograma icono"r
                             className="size-7 mx-3"
                             style={{ display: 'block' }}
                         />

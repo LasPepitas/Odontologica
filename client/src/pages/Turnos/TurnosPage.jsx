@@ -4,32 +4,59 @@ import { useEffect, useState } from 'react';
 import fechasJson from './fechas.json';
 import { AddIcon } from '../../assets/icons';
 import FormularioModal from './FormularioModal';
+import { getNextSevenDays } from '../../utilities/index';
+import dayjs from 'dayjs';
 
 const TurnosPage = () => {
     const { user } = useSelector((state) => state.user);
     const { user: userGoogle, isAuthenticated, isLoading } = useAuth0();
     const [formulario, setFormulario] = useState(false);
     const [diaCita, setDiaCita] = useState([]);
-    const [fechas, setFechas] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [hours] = useState([
+        "08:00", "09:00", "10:00", "11:00", "12:00",
+        "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"
+    ]);
+    const [fechas, setFechas] = useState([]);
+
+    
+    const obtenerFechas = async () => {
+        try {
+            const dias = getNextSevenDays().map(day => day.format('YYYY-MM-DD'));
+            const turnosGenerados = [];
+    
+            const currentTime = dayjs();
+    
+            for (const dia of dias) {
+                for (const hora of hours) {
+                    const turnoHora = dayjs(`${dia} ${hora}`, 'YYYY-MM-DD HH:mm');
+                    let estado = "disponible";
+    
+                    if (turnoHora.isBefore(currentTime)) {
+                        estado = "ocupado";
+                    }
+    
+                    turnosGenerados.push({
+                        id: `${dia}-${hora}`,
+                        fecha: dia,
+                        hora: hora,
+                        estado: estado
+                    });
+                }
+            }
+    
+            setFechas(turnosGenerados);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error al obtener los datos:', error);
+            setLoading(false);
+        }
+    };
+    
+        
+    
 
     useEffect(() => {
-        const obtenerFechas = async () => {
-            try {
-                const response = await fetch(
-                    `data:application/json,${encodeURIComponent(
-                        JSON.stringify(fechasJson),
-                    )}`,
-                );
-                const data = await response.json();
-                setFechas(data.consultas);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error al obtener los datos:', error);
-                setLoading(false);
-            }
-        };
-
         obtenerFechas();
     }, []);
 
@@ -39,13 +66,13 @@ const TurnosPage = () => {
     };
 
     const handleFilterButton = (opcion) => {
-        if(opcion === 1){
-            setFechas(fechasJson.consultas);
-        }
-        else if(opcion === 2){
-            setFechas(fechasJson.consultas.filter(citas => citas.estado === "disponible"));
+        if (opcion === 1) {
+            obtenerFechas()
+        } else if (opcion === 2) {
+            setFechas(fechas.filter(turno => turno.estado === "disponible"));
         }
     };
+    
 
     return (
         <div>
@@ -73,35 +100,27 @@ const TurnosPage = () => {
                 </div>
                 {!isLoading && !loading && fechas.length !== 0 && (
                     <table className="flex flex-col w-full md:text-center">
-                        <thead className="flex w-full bg-white text-center">
-                            <th className="w-[25%] px-4 py-2 text-center">
-                                Fecha
-                            </th>
-                            <th className="w-[25%] px-4 py-2 text-center">
-                                Hora
-                            </th>
-                            <th className="w-[25%] px-4 py-2 text-center">
-                                Estado
-                            </th>
-                            <th className="w-[25%] px-4 py-2 text-center">
-                                Acciones
-                            </th>
-                        </thead>
+                            <tr className="flex w-full bg-white text-center flex-row">
+                                <th className="w-[25%] px-4 py-2 text-center">Fecha</th>
+                                <th className="w-[25%] px-4 py-2 text-center">Hora</th>
+                                <th className="w-[25%] px-4 py-2 text-center">Estado</th>
+                                <th className="w-[25%] px-4 py-2 text-center">Acciones</th>
+                            </tr>
                         <tbody>
                             {fechas.map((registro) => (
                                 <tr
                                     key={registro.id}
                                     className="flex flex-row w-full bg-white even:bg-gray-100 "
                                 >
-                                    <td className="w-[25%] border px-4 py-2 text-center">
+                                    <td className="w-[25%] border px-4 py-2 text-center flex justify-center items-center">
                                         {registro.fecha}
                                     </td>
-                                    <td className="w-[25%] border px-4 py-2 text-center">
+                                    <td className="w-[25%] border px-4 py-2 text-center flex justify-center items-center">
                                         {registro.hora}
                                     </td>
                                     <td 
                                         className={`w-[25%] flex border px-4 py-2 text-center md:overflow-hidden md:font-bold 
-                                        ${registro.estado === "ocupado" ? "text-red-600" : "text-green-500"} justify-center`}
+                                        ${registro.estado === "ocupado" ? "text-red-600" : "text-green-500"} justify-center items-center`}
                                     >
                                         <span className={`${registro.estado === "disponible" ? "flex" : "hidden"} md:hidden`}>
                                             🟢
@@ -113,7 +132,7 @@ const TurnosPage = () => {
                                             {registro.estado}
                                         </span>
                                     </td>
-                                    <td className="w-[25%] border px-4 py-2 flex justify-center">
+                                    <td className="w-[25%] border px-4 py-2 flex justify-center items-center">
                                         <button
                                             type="button"
                                             className="hover:cursor-pointer"
@@ -123,7 +142,6 @@ const TurnosPage = () => {
                                                     registro.hora,
                                                 )
                                             }
-
                                             disabled={registro.estado === "ocupado"}
                                         >
                                             <img
@@ -147,7 +165,6 @@ const TurnosPage = () => {
             >
                 {diaCita}
             </FormularioModal>
-
         </div>
     );
 };

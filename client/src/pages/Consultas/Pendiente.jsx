@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import { DeleteIcon, DetailsIcon, EditIcon } from "../../assets/icons";
+import { DeleteIcon, EditIcon } from "../../assets/icons";
 import Tablas from "./Tablas";
 
 function Pendiente({ isLoading, data }) {

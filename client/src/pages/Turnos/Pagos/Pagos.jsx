@@ -84,7 +84,7 @@ function Pagos() {
     };
 
     return (
-        <AuthLayout>
+        <>
             {loading ? (
                 <div className="w-screen h-screen flex items-center justify-center">
                     <LoaderSignal />
@@ -151,7 +151,7 @@ function Pagos() {
                     </div>
                 </div>
             )}
-        </AuthLayout>
+        </>
     );
 }
 

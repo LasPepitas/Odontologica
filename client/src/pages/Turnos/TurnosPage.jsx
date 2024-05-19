@@ -158,7 +158,9 @@ const TurnosPage = () => {
                 )}
                 {loading && <p>Cargando...</p>}
             </div>
-
+            {
+                console.log(typeof(diaCita))
+            }
             <FormularioModal
                 open={formulario}
                 onClose={() => setFormulario(false)}

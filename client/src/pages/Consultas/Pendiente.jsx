@@ -16,12 +16,11 @@ function Pendiente({ isLoading, data }) {
         const addExtraFields = (filterData) => {
             return filterData.map(item => {
                 const { date } = item;
-                const [fecha, hora] = date.split('T');
-                const horaSinMilisegundos = hora.split('.')[0];
+                const [fecha, hora] = date.split(' ');
                 return {
                     ...item,
                     fecha,
-                    hora: horaSinMilisegundos
+                    hora: hora
                 };
             });
         };

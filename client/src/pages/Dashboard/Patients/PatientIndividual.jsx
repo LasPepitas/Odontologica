@@ -1,26 +1,26 @@
 import { useParams } from 'react-router-dom';
 import { getAppointmentById } from '../../../services';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const PatientIndividual = () => {
     const { id } = useParams();
     const [appointment, setAppointment] = useState({});
-
+    const navigate = useNavigate();
     useEffect(() => {
-        getAppointmentById(id).then((data) =>
-            setAppointment({
-                ...data.appointment,
-                ...data.paymentAppointment,
-            }),
-        );
-    }, [id]);
+        const fetchAppointment = async () => {
+            const appointment = await getAppointmentById(id);
+            if (!appointment) navigate('/dashboard/pacientes');
+            setAppointment(appointment);
+        };
+        fetchAppointment();
+    }, [id, navigate]);
 
     const handlePayment = () => {
         console.log('Pago confirmado');
     };
 
     console.log(appointment);
-
     return (
         <div className="p-5">
             <h2 className="font-bold text-2xl mb-5">

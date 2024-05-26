@@ -7,7 +7,7 @@ export default {
             },
             colors: {
                 primary: '#3164DE',
-                secondary: '#047857',
+                secondary: '#769BF5',
                 danger: '#DC2626',
                 calypso: {
                     50: '#ecfeff',

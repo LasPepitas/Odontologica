@@ -14,4 +14,5 @@ VALUES
 ('9', 'Gum Surgery', 'Periodontal surgery for gum disease', 120, 300.00, NOW(), NOW()),
 ('10', 'Oral Examination', 'Comprehensive dental examination', 45, 75.00, NOW(), NOW());
 
-
+-- CREATE DENTIST
+UPDATE users SET role = 'dentist' WHERE id='UUID';

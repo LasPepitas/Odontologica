@@ -71,7 +71,16 @@ AppointmentService.findAll = async () => {
 };
 
 AppointmentService.findOne = async (id) => {
-    const appointment = await Appointment.findByPk(id);
+    const appointment = await Appointment.findOne({
+        where: { id },
+        include: [
+            {
+                model: User,
+                as: 'user',
+                attributes: ['name', 'email', 'lastname'],
+            },
+        ],
+    });
     if (!appointment) {
         throw new Error('Appointment not found');
     }
@@ -157,14 +166,30 @@ AppointmentService.updateStatus = async (id, status) => {
     };
 };
 AppointmentService.getAppointmentInfo = async (id) => {
-    const appointment = await Appointment.findByPk(id);
+    const appointment = await Appointment.findOne({
+        where: { id },
+        include: [
+            {
+                model: User,
+                as: 'user',
+                attributes: ['name', 'email', 'lastname'],
+            },
+            {
+                model: Payment,
+                as: 'payment',
+                attributes: [
+                    'amount',
+                    'payment_method',
+                    'payment_receipt_image',
+                ],
+            },
+        ],
+    });
     if (!appointment) {
         throw new Error('Appointment not found');
     }
-    const paymentAppointment = await Payment.findByPk(appointment.id_payment);
     return {
         appointment,
-        paymentAppointment,
     };
 };
 

@@ -1,85 +1,107 @@
 import { useParams } from 'react-router-dom';
 import { getAppointmentById } from '../../../services';
 import { useEffect, useState } from 'react';
+
 const PatientIndividual = () => {
     const { id } = useParams();
-    const [appointment, setAppointment] = useState({});
+    const [appointment, setAppointment] = useState(null);
+
     useEffect(() => {
-        getAppointmentById(id).then((data) =>
-            setAppointment({
-                ...data.appointment,
-                ...data.paymentAppointment,
-            }),
-        );
+        getAppointmentById(id).then((data) => {
+            setAppointment(data.appointment);
+        });
     }, [id]);
+
     const handlePayment = () => {
         console.log('Pago confirmado');
     };
-    console.log(appointment);
+
+    if (!appointment) {
+        return (
+            <div className="flex justify-center items-center h-screen bg-primary">
+                <span className="text-white text-2xl font-semibold">
+                    Cargando...
+                </span>
+            </div>
+        );
+    }
+
     return (
-        <div>
-            <h2 className="font-bold text-2xl mb-5">
-                Información del paciente
-            </h2>
-            <div>
-                <div>
-                    <h3 className="font-bold text-xl">Nombre:</h3>
-                    <p>{appointment.user_name}</p>
+        <div className="px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto bg-white shadow-md rounded-md p-6">
+                <h2 className="text-3xl font-bold text-primary mb-6 border-b pb-3">
+                    Información de la Cita
+                </h2>
+                <div className="mb-6">
+                    <h3 className="text-xl font-semibold text-primary mb-2">
+                        Detalles del Paciente
+                    </h3>
+                    <div className="bg-white p-4 rounded-md shadow-md">
+                        <p className="text-gray-800">
+                            <span className="font-semibold">Nombre:</span>{' '}
+                            {appointment.user.name} {appointment.user.lastname}
+                        </p>
+                        <p className="text-gray-800">
+                            <span className="font-semibold">Email:</span>{' '}
+                            {appointment.user.email}
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h3 className="font-bold text-xl">Apellido:</h3>
-                    <p>{appointment.user_lastName ?? 'No disponible'}</p>
+                <div className="mb-6">
+                    <h3 className="text-xl font-semibold text-primary mb-2">
+                        Detalles de la Cita
+                    </h3>
+                    <div className="bg-white p-4 rounded-md shadow-md">
+                        <p className="text-gray-800">
+                            <span className="font-semibold">Fecha:</span>{' '}
+                            {new Date(appointment.date).toLocaleString()}
+                        </p>
+                        <p className="text-gray-800">
+                            <span className="font-semibold">Duración:</span>{' '}
+                            {appointment.duration} minutos
+                        </p>
+                        <p className="text-gray-800">
+                            <span className="font-semibold">Descripción:</span>{' '}
+                            {appointment.description}
+                        </p>
+                        <p className="text-gray-800">
+                            <span className="font-semibold">Estado:</span>{' '}
+                            {appointment.status}
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h3 className="font-bold text-xl">Email:</h3>
-                    <p>{appointment.user_email}</p>
+                <div className="mb-6">
+                    <h3 className="text-xl font-semibold text-primary mb-2">
+                        Detalles del Pago
+                    </h3>
+                    <div className="bg-white p-4 rounded-md shadow-md">
+                        <p className="text-gray-800">
+                            <span className="font-semibold">Monto:</span> S/{' '}
+                            {appointment.payment.amount}
+                        </p>
+                        <p className="text-gray-800">
+                            <span className="font-semibold">
+                                Método de Pago:
+                            </span>{' '}
+                            {appointment.payment.payment_method}
+                        </p>
+                        <div className="mt-4">
+                            <img
+                                src={appointment.payment.payment_receipt_image}
+                                alt="Recibo de pago"
+                                className="max-w-xs border rounded-md shadow"
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h3 className="font-bold text-xl">Estado de la cita:</h3>
-                    <p>{appointment.status}</p>
+                <div className="text-center pb-16">
+                    <button
+                        onClick={handlePayment}
+                        className="bg-primary font-bold text-white py-2 px-6 rounded-md shadow-md hover:bg-secondary-dark transition duration-300"
+                    >
+                        Confirmar pago
+                    </button>
                 </div>
-                <div>
-                    <h3 className="font-bold text-xl">Fecha:</h3>
-                    <p>{appointment.date}</p>
-                </div>
-                <div>
-                    <h3 className="font-bold text-xl">Duración:</h3>
-                    <p>{appointment.duration}</p>
-                </div>
-                <div>
-                    <h3 className="font-bold text-xl">Descripción:</h3>
-                    <p>{appointment.description}</p>
-                </div>
-                <div>
-                    <h3 className="font-bold text-xl">Método de pago:</h3>
-                    <p>{appointment.payment_method}</p>
-                </div>
-                <div>
-                    <h3 className="font-bold text-xl">Monto:</h3>
-                    <p>{appointment.amount}</p>
-                </div>
-                <div>
-                    <h3 className="font-bold text-xl">Estado de pago:</h3>
-                    <p>{appointment.status}</p>
-                </div>
-                <div>
-                    <h3 className="font-bold text-xl">Recibo:</h3>
-                    {appointment.payment_receipt_image ? (
-                        <img
-                            src={appointment.payment_receipt_image}
-                            alt="Recibo de pago"
-                            className="w-1/2"
-                        />
-                    ) : (
-                        <p className="py-6">No hay recibo</p>
-                    )}
-                </div>
-                <button
-                    onClick={handlePayment}
-                    className="bg-blue-500 text-white py-2 px-6 w-fit rounded-md"
-                >
-                    Confirmar pago
-                </button>
             </div>
         </div>
     );

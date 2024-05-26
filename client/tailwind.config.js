@@ -6,7 +6,7 @@ export default {
                 imprima: ['Imprima', 'sans-serif'],
             },
             colors: {
-                primary: '#11728D',
+                primary: '#3164DE',
                 secondary: '#047857',
                 danger: '#DC2626',
                 calypso: {

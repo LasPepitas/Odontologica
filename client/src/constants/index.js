@@ -15,3 +15,76 @@ export const hours = [
     '17:00',
     '18:00',
 ];
+
+export const services = [
+    {
+        id: 1,
+        name: 'Cleaning',
+        description: 'Routine dental cleaning',
+        duration: 30,
+        price: 50.0,
+    },
+    {
+        id: 2,
+        name: 'Extraction',
+        description: 'Tooth extraction procedure',
+        duration: 60,
+        price: 100.0,
+    },
+    {
+        id: 3,
+        name: 'Filling',
+        description: 'Dental filling for cavities',
+        duration: 45,
+        price: 80.0,
+    },
+    {
+        id: 4,
+        name: 'Root Canal',
+        description: 'Root canal therapy for infected tooth',
+        duration: 90,
+        price: 200.0,
+    },
+    {
+        id: 5,
+        name: 'Teeth Whitening',
+        description: 'Professional teeth whitening treatment',
+        duration: 60,
+        price: 150.0,
+    },
+    {
+        id: 6,
+        name: 'Dental Implant',
+        description: 'Surgical placement of dental implants',
+        duration: 120,
+        price: 500.0,
+    },
+    {
+        id: 7,
+        name: 'Dentures',
+        description: 'Full or partial denture fabrication',
+        duration: 180,
+        price: 800.0,
+    },
+    {
+        id: 8,
+        name: 'Orthodontic Treatment',
+        description: 'Braces or Invisalign for teeth alignment',
+        duration: 180,
+        price: 1500.0,
+    },
+    {
+        id: 9,
+        name: 'Gum Surgery',
+        description: 'Periodontal surgery for gum disease',
+        duration: 120,
+        price: 300.0,
+    },
+    {
+        id: 10,
+        name: 'Oral Examination',
+        description: 'Comprehensive dental examination',
+        duration: 45,
+        price: 75.0,
+    },
+];

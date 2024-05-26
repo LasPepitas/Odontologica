@@ -1,78 +1,76 @@
-import { useAuth0 } from '@auth0/auth0-react';
-import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import fechasJson from './fechas.json';
 import { AddIcon } from '../../assets/icons';
 import FormularioModal from './FormularioModal';
 import { getNextSevenDays } from '../../utilities/index';
 import dayjs from 'dayjs';
-
+import { hours } from '../../constants';
+import { getAppointmentsByDentist } from '../../services';
 const TurnosPage = () => {
-    const { user } = useSelector((state) => state.user);
-    const { user: userGoogle, isAuthenticated, isLoading } = useAuth0();
-    const [formulario, setFormulario] = useState(false);
-    const [diaCita, setDiaCita] = useState([]);
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [diaCita, setDiaCita] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [hours] = useState([
-        "08:00", "09:00", "10:00", "11:00", "12:00",
-        "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"
-    ]);
     const [fechas, setFechas] = useState([]);
-
-    
     const obtenerFechas = async () => {
         try {
-            const dias = getNextSevenDays().map(day => day.format('YYYY-MM-DD'));
-            const turnosGenerados = [];
-    
-            const currentTime = dayjs();
-    
-            for (const dia of dias) {
-                for (const hora of hours) {
-                    const turnoHora = dayjs(`${dia} ${hora}`, 'YYYY-MM-DD HH:mm');
-                    let estado = "disponible";
-    
-                    if (turnoHora.isBefore(currentTime)) {
-                        estado = "ocupado";
-                    }
-    
-                    turnosGenerados.push({
-                        id: `${dia}-${hora}`,
-                        fecha: dia,
-                        hora: hora,
-                        estado: estado
+            const appointments = await getAppointmentsByDentist(1);
+            const dias = getNextSevenDays();
+            console.log('----------------');
+            console.log(
+                'appointments',
+                new Date(appointments[1].date).toISOString(),
+            );
+            console.log(
+                'dias',
+                new Date(
+                    dias[1].format('YYYY-MM-DD') + ' ' + hours[1],
+                ).toISOString(),
+            );
+            console.log('----------------');
+            const fechasGeneradas = [];
+            dias.forEach((dia) => {
+                hours.forEach((hora) => {
+                    const appointment = appointments.find((appointment) => {
+                        const dateAppointment = new Date(
+                            appointment.date,
+                        ).toISOString();
+                        const dateDay = new Date(
+                            dia.format('YYYY-MM-DD') + ' ' + hora,
+                        ).toISOString();
+                        return dateAppointment === dateDay;
                     });
-                }
-            }
-    
-            setFechas(turnosGenerados);
+                    fechasGeneradas.push({
+                        id: `${dia}-${hora}`,
+                        fecha: dayjs(dia).format('DD/MM/YYYY'),
+                        hora,
+                        date: new Date(
+                            dia.format('YYYY-MM-DD') + ' ' + hora,
+                        ).toISOString(),
+                        estado: appointment ? 'ocupado' : 'disponible',
+                    });
+                });
+            });
+            setFechas(fechasGeneradas);
             setLoading(false);
         } catch (error) {
             console.error('Error al obtener los datos:', error);
             setLoading(false);
         }
     };
-    
-        
-    
-
     useEffect(() => {
         obtenerFechas();
     }, []);
-
-    const handleAddButton = (fecha, hora) => {
-        setDiaCita([fecha, hora]);
-        setFormulario(true);
+    const handleAddButton = (date) => {
+        console.log('date', date);
+        setDiaCita(date);
+        setIsOpenModal(true);
     };
-
     const handleFilterButton = (opcion) => {
         if (opcion === 1) {
-            obtenerFechas()
+            obtenerFechas();
         } else if (opcion === 2) {
-            setFechas(fechas.filter(turno => turno.estado === "disponible"));
+            setFechas(fechas.filter((turno) => turno.estado === 'disponible'));
         }
     };
-    
 
     return (
         <div>
@@ -98,14 +96,22 @@ const TurnosPage = () => {
                         Disponibles
                     </button>
                 </div>
-                {!isLoading && !loading && fechas.length !== 0 && (
+                {!loading && fechas.length !== 0 && (
                     <table className="flex flex-col w-full md:text-center">
-                            <tr className="flex w-full bg-white text-center flex-row">
-                                <th className="w-[25%] px-4 py-2 text-center">Fecha</th>
-                                <th className="w-[25%] px-4 py-2 text-center">Hora</th>
-                                <th className="w-[25%] px-4 py-2 text-center">Estado</th>
-                                <th className="w-[25%] px-4 py-2 text-center">Acciones</th>
-                            </tr>
+                        <tr className="flex w-full bg-white text-center flex-row">
+                            <th className="w-[25%] px-4 py-2 text-center">
+                                Fecha
+                            </th>
+                            <th className="w-[25%] px-4 py-2 text-center">
+                                Hora
+                            </th>
+                            <th className="w-[25%] px-4 py-2 text-center">
+                                Estado
+                            </th>
+                            <th className="w-[25%] px-4 py-2 text-center">
+                                Acciones
+                            </th>
+                        </tr>
                         <tbody>
                             {fechas.map((registro) => (
                                 <tr
@@ -118,14 +124,30 @@ const TurnosPage = () => {
                                     <td className="w-[25%] border px-4 py-2 text-center flex justify-center items-center">
                                         {registro.hora}
                                     </td>
-                                    <td 
+                                    <td
                                         className={`w-[25%] flex border px-4 py-2 text-center md:overflow-hidden md:font-bold 
-                                        ${registro.estado === "ocupado" ? "text-red-600" : "text-green-500"} justify-center items-center`}
+                                        ${
+                                            registro.estado === 'ocupado'
+                                                ? 'text-red-600'
+                                                : 'text-green-500'
+                                        } justify-center items-center`}
                                     >
-                                        <span className={`${registro.estado === "disponible" ? "flex" : "hidden"} md:hidden`}>
+                                        <span
+                                            className={`${
+                                                registro.estado === 'disponible'
+                                                    ? 'flex'
+                                                    : 'hidden'
+                                            } md:hidden`}
+                                        >
                                             🟢
                                         </span>
-                                        <span className={`${registro.estado === "ocupado" ? "flex" : "hidden"}  md:hidden`}>
+                                        <span
+                                            className={`${
+                                                registro.estado === 'ocupado'
+                                                    ? 'flex'
+                                                    : 'hidden'
+                                            }  md:hidden`}
+                                        >
                                             🔴
                                         </span>
                                         <span className={`md:flex hidden`}>
@@ -137,12 +159,11 @@ const TurnosPage = () => {
                                             type="button"
                                             className="hover:cursor-pointer"
                                             onClick={() =>
-                                                handleAddButton(
-                                                    registro.fecha,
-                                                    registro.hora,
-                                                )
+                                                handleAddButton(registro.date)
                                             }
-                                            disabled={registro.estado === "ocupado"}
+                                            disabled={
+                                                registro.estado === 'ocupado'
+                                            }
                                         >
                                             <img
                                                 src={AddIcon}
@@ -159,11 +180,10 @@ const TurnosPage = () => {
                 {loading && <p>Cargando...</p>}
             </div>
             <FormularioModal
-                open={formulario}
-                onClose={() => setFormulario(false)}
-            >
-                {diaCita}
-            </FormularioModal>
+                open={isOpenModal}
+                onClose={() => setIsOpenModal(false)}
+                diaCita={diaCita}
+            />
         </div>
     );
 };

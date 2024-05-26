@@ -9,7 +9,7 @@ const Appointment = sequelize.define('appointment', {
         allowNull: false,
     },
     date: {
-        type: DataTypes.STRING,
+        type: DataTypes.DATE,
         allowNull: false,
     },
     duration: {

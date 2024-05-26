@@ -3,7 +3,7 @@ import { hours } from '../../../constants';
 import { getAppointmentsByDentist } from '../../../services/appointments';
 import { useEffect, useState } from 'react';
 import Modal from './Modal';
-
+import './styles.css';
 const WeekCalendar = () => {
     const [appointments, setAppointments] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ const WeekCalendar = () => {
                     onClose={() => setIsModalOpen(false)}
                 />
             )}
-            <div className="h-[150%] grid grid-cols-8 bg-white rounded-xl">
+            <div className="h-[150%] grid grid-cols-8 bg-white rounded-xl min-w-[700px] overflow-auto horario">
                 <div className="grid grid-rows-10">
                     <h4 className="font-bold justify-center flex items-center border border-gray-200">
                         Horarios

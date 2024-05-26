@@ -1,44 +1,29 @@
 import { useEffect, useState } from 'react';
-import { BackArrowIcon, CopyIcon } from "../../../assets/icons";
-import { Yape } from "../../../assets/images";
-import { Link } from 'react-router-dom';
-import AuthLayout from '../../../layouts/AuthLayout';
+import { BackArrowIcon, CopyIcon } from '../../../assets/icons';
+import { Yape } from '../../../assets/images';
+import { Link, useNavigate } from 'react-router-dom';
 import LoaderSignal from '../../../components/loaderSignal/LoaderSignal';
 
 function Pagos() {
     const [copied, setCopied] = useState(false);
     const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [body, setBody] = useState({
-        date: "",
-        duration: 0,
-        id_user: "",
-        id_dentist: "1",
-        id_treatment: "",
-        description: "",
-        amount: null
-    });
-
+    const [body, setBody] = useState({});
+    const navigate = useNavigate();
     useEffect(() => {
-        const aux = JSON.parse(localStorage.getItem("body"));
-
+        const aux = JSON.parse(localStorage.getItem('reserva-data'));
+        console.log('aux', aux);
         setBody({
-            date: aux.date,
-            duration: aux.duration,
-            id_user: aux.id_user,
-            id_dentist: aux.id_dentist,
-            id_treatment: aux.id_treatment,
-            description: aux.description,
+            ...aux,
             amount: 5,
         });
 
-        
-        console.log(body)
+        console.log(body);
     }, []);
 
     const handleImage = (e) => {
         setImage(e.target.files[0]);
-        console.log(e.target.files[0]);  // Corrected logging
+        console.log(e.target.files[0]); // Corrected logging
     };
 
     const handleCopy = () => {
@@ -64,15 +49,18 @@ function Pagos() {
         formData.append('image', image);
 
         try {
-            const response = await fetch('https://odontologica.onrender.com/api/v1/appointments', {
-                method: 'POST',
-                body: formData
-            });
+            const response = await fetch(
+                'http://localhost:3000/api/v1/appointments',
+                {
+                    method: 'POST',
+                    body: formData,
+                },
+            );
 
             if (response.ok) {
                 console.log('Solicitud POST exitosa');
-                localStorage.removeItem("body");
-                window.location.href = "/dashboard/consultas";
+                localStorage.removeItem('reserva-data');
+                navigate('/dashboard/turnos');
             } else {
                 console.error('Error en la solicitud POST:', response.status);
             }
@@ -86,21 +74,23 @@ function Pagos() {
     return (
         <>
             {loading ? (
-                <div className="w-screen h-screen flex items-center justify-center">
-                    <LoaderSignal />
-                </div>
+                <LoaderSignal />
             ) : (
                 <div className="w-screen h-screen flex flex-col bg-white pl-5 py-2 font-imprima">
-                    <div className='h-[7%]'>
+                    <div className="h-[7%]">
                         <Link to="/dashboard/turnos">
-                            <img src={BackArrowIcon} alt="flecha icono" className='size-10 mb-10' />
+                            <img
+                                src={BackArrowIcon}
+                                alt="flecha icono"
+                                className="size-10 mb-10"
+                            />
                         </Link>
                     </div>
-                    <div className='md:flex md:justify-center md:items-center h-[93%] md:flex-col md:w-full'>
+                    <div className="md:flex md:justify-center md:items-center h-[93%] md:flex-col md:w-full">
                         <div className="flex flex-col h-[8%] justify-start text-3xl font-bold mx-5 md:w-full">
                             <p>Completa tu pago</p>
                         </div>
-                        <div className='h-[92%] md:w-full md:flex'>
+                        <div className="h-[92%] md:w-full md:flex">
                             <div className="flex flex-col h-[45%] items-center mx-5 md:w-[50%] md:h-full md:justify-center">
                                 <p className="text-gray-500">
                                     Recuerda hacer tu reserva con solo 5 soles
@@ -111,7 +101,7 @@ function Pagos() {
                                     className="block w-[80%] mx-auto md:w-[60%]"
                                 />
                             </div>
-                            <div className='h-[40%] mx-5 md:w-[50%] md:h-full md:flex md:justify-center md:flex-col '>
+                            <div className="h-[40%] mx-5 md:w-[50%] md:h-full md:flex md:justify-center md:flex-col ">
                                 <label className="text-gray-500">
                                     ¿No puedes escanear el QR?
                                 </label>
@@ -122,7 +112,10 @@ function Pagos() {
                                     <div className="flex-grow p-4 ">
                                         965100861
                                     </div>
-                                    <button className="p-4 focus:outline-none" onClick={handleCopy}>
+                                    <button
+                                        className="p-4 focus:outline-none"
+                                        onClick={handleCopy}
+                                    >
                                         <img
                                             src={CopyIcon}
                                             alt="copia icono"
@@ -130,16 +123,28 @@ function Pagos() {
                                         />
                                     </button>
                                 </div>
-                                {copied && <p className="text-green-500 mt-2">¡Número copiado al portapapeles!</p>}
+                                {copied && (
+                                    <p className="text-green-500 mt-2">
+                                        ¡Número copiado al portapapeles!
+                                    </p>
+                                )}
 
                                 <form onSubmit={handleForm}>
-                                    <div className='flex flex-col'>
-                                        <label htmlFor='captura'>Sube una captura de tu pago</label>
-                                        <input type="file" id='captura' className='mt-3' onChange={handleImage} required />
+                                    <div className="flex flex-col">
+                                        <label htmlFor="captura">
+                                            Sube una captura de tu pago
+                                        </label>
+                                        <input
+                                            type="file"
+                                            id="captura"
+                                            className="mt-3"
+                                            onChange={handleImage}
+                                            required
+                                        />
                                     </div>
-                                    <div className='flex justify-center mt-4 md:justify-stretch md:ml-20'>
+                                    <div className="flex justify-center mt-4 md:justify-stretch md:ml-20">
                                         <button
-                                            className='w-[50%] h-[40px] bg-green-500 text-white rounded-lg md:w-[30%]'
+                                            className="w-[50%] h-[40px] bg-green-500 text-white rounded-lg md:w-[30%]"
                                             type="submit"
                                         >
                                             Enviar

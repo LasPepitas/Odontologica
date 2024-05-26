@@ -4,7 +4,7 @@ import SideNav from '../../layouts/SideNav';
 const DashboardPage = () => {
     return (
         <div
-            className={`w-full h-screen font-imprima bg-white grid grid-cols-1 md:grid-cols-[1fr_7fr]`}
+            className={`w-full h-screen font-imprima bg-white grid grid-cols-1 md:grid-cols-[1fr_7fr] gap-x-3 md:gap-x-4 lg:gap-x-8`}
         >
             <SideNav />
             <div

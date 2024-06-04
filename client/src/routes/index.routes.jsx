@@ -1,7 +1,12 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
-import { DashboardPage, LoginPage, RegisterPage } from '../pages';
+import {
+    DashboardPage,
+    LoginPage,
+    RegisterPage,
+    HistorialPage,
+} from '../pages';
 import TurnosPage from '../pages/Turnos/TurnosPage';
 import ConsultasPage from '../pages/Consultas/ConsultasPage';
 import HorariosTable from '../pages/Dashboard/Horarios/HorariosTable';
@@ -44,6 +49,10 @@ export const router = createBrowserRouter([
                             {
                                 path: 'pacientes/:id',
                                 element: <PatientIndividual />,
+                            },
+                            {
+                                path: 'historial',
+                                element: <HistorialPage />,
                             },
                         ],
                     },

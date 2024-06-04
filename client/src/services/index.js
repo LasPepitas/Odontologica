@@ -1,5 +1,9 @@
 import { register, login, authGoogle, getProfile } from './auth';
-import { getAppointmentsByDentist, getAppointmentById } from './appointments';
+import {
+    getAppointmentsByDentist,
+    getAppointmentById,
+    updateAppointment,
+} from './appointments';
 
 export {
     register,
@@ -8,4 +12,5 @@ export {
     getProfile,
     getAppointmentsByDentist,
     getAppointmentById,
+    updateAppointment,
 };

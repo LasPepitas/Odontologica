@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { getAppointmentById } from '../../../services';
+import { getAppointmentById, updateAppointment } from '../../../services';
 import { useEffect, useState } from 'react';
 
 const PatientIndividual = () => {
@@ -12,13 +12,21 @@ const PatientIndividual = () => {
         });
     }, [id]);
 
-    const handlePayment = () => {
-        console.log('Pago confirmado');
+    const handlePayment = async () => {
+        try {
+            const updatedAppointment = await updateAppointment(id, {
+                status: 'completed',
+            });
+            setAppointment(updatedAppointment.appointment);
+            window.location.href = '/dashboard/pacientes';
+        } catch (error) {
+            alert('Ocurrió un error al confirmar el pago');
+        }
     };
 
     if (!appointment) {
         return (
-            <div className="flex justify-center items-center h-screen bg-primary">
+            <div className="flex justify-center items-center h-screen w-screen fixed z-[99] top-0 left-0 right-0 bg-primary/50">
                 <span className="text-white text-2xl font-semibold">
                     Cargando...
                 </span>

@@ -6,6 +6,7 @@ import {
     LoginPage,
     RegisterPage,
     HistorialPage,
+    NotFoundPage,
 } from '../pages';
 import TurnosPage from '../pages/Turnos/TurnosPage';
 import ConsultasPage from '../pages/Consultas/ConsultasPage';
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([
             { path: 'login', element: <LoginPage /> },
             { path: 'register', element: <RegisterPage /> },
             { path: '/', element: <LandigPage /> },
+            { path: '404', element: <NotFoundPage /> },
         ],
     },
     {
@@ -61,5 +63,9 @@ export const router = createBrowserRouter([
             },
             { path: 'pagos', element: <Pagos /> },
         ],
+    },
+    {
+        path: '*',
+        element: <Navigate to="/404" />,
     },
 ]);

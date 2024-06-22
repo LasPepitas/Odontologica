@@ -1,15 +1,33 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
     const [patientName, setPatientName] = useState('');
     const [patientAge, setPatientAge] = useState('');
     const [patientAddress, setPatientAddress] = useState('');
-    const [patientMedicalHistory, setPatientMedicalHistory] = useState('');
+    const [patientSex, setPatientSex] = useState('');
+    const [patientAllergies, setPatientAllergies] = useState('');
+    const [patientDiseases, setPatientDiseases] = useState('');
+    const [patientMedications, setPatientMedications] = useState('');
+    const [patientTreatments, setPatientTreatments] = useState('');
+    const [patientSurgeries, setPatientSurgeries] = useState('');
+    const [patientAttachments, setPatientAttachments] = useState(null);
 
     const handleSubmit = (event) => {
         event.preventDefault();
         // Aquí puedes procesar la información del formulario
-        console.log('Formulario enviado');
+        console.log('Formulario enviado', {
+            patientName,
+            patientAge,
+            patientAddress,
+            patientSex,
+            patientAllergies,
+            patientDiseases,
+            patientMedications,
+            patientTreatments,
+            patientSurgeries,
+            patientAttachments,
+        });
     };
 
     return (
@@ -67,19 +85,18 @@ const Index = () => {
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                 </div>
+
                 <div className="mb-4">
                     <label
                         className="block text-gray-700 text-sm font-bold mb-2"
-                        htmlFor="patientMedicalHistory"
+                        htmlFor="patientSex"
                     >
                         Sexo:
                     </label>
                     <select
-                        id="patientMedicalHistory"
-                        value={patientMedicalHistory}
-                        onChange={(event) =>
-                            setPatientMedicalHistory(event.target.value)
-                        }
+                        id="patientSex"
+                        value={patientSex}
+                        onChange={(event) => setPatientSex(event.target.value)}
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     >
                         <option value="">Selecciona una opción</option>
@@ -87,18 +104,19 @@ const Index = () => {
                         <option value="Femenino">Femenino</option>
                     </select>
                 </div>
+
                 <div className="mb-4">
                     <label
                         className="block text-gray-700 text-sm font-bold mb-2"
-                        htmlFor="patientMedicalHistory"
+                        htmlFor="patientAllergies"
                     >
                         Alergias:
                     </label>
                     <select
-                        id="patientMedicalHistory"
-                        value={patientMedicalHistory}
+                        id="patientAllergies"
+                        value={patientAllergies}
                         onChange={(event) =>
-                            setPatientMedicalHistory(event.target.value)
+                            setPatientAllergies(event.target.value)
                         }
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     >
@@ -107,74 +125,79 @@ const Index = () => {
                         <option value="No">No</option>
                     </select>
                 </div>
+
                 <div className="mb-4">
                     <label
                         className="block text-gray-700 text-sm font-bold mb-2"
-                        htmlFor="patientMedicalHistory"
+                        htmlFor="patientDiseases"
                     >
                         Enfermedades:
                     </label>
                     <textarea
-                        id="patientMedicalHistory"
-                        value={patientMedicalHistory}
+                        id="patientDiseases"
+                        value={patientDiseases}
                         onChange={(event) =>
-                            setPatientMedicalHistory(event.target.value)
+                            setPatientDiseases(event.target.value)
                         }
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                 </div>
+
                 <div className="mb-4">
                     <label
                         className="block text-gray-700 text-sm font-bold mb-2"
-                        htmlFor="patientMedicalHistory"
+                        htmlFor="patientMedications"
                     >
                         Medicamentos:
                     </label>
                     <textarea
-                        id="patientMedicalHistory"
-                        value={patientMedicalHistory}
+                        id="patientMedications"
+                        value={patientMedications}
                         onChange={(event) =>
-                            setPatientMedicalHistory(event.target.value)
+                            setPatientMedications(event.target.value)
                         }
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                 </div>
+
                 <div className="mb-4">
                     <label
                         className="block text-gray-700 text-sm font-bold mb-2"
-                        htmlFor="patientMedicalHistory"
+                        htmlFor="patientTreatments"
                     >
                         Tratamientos previos:
                     </label>
                     <textarea
-                        id="patientMedicalHistory"
-                        value={patientMedicalHistory}
+                        id="patientTreatments"
+                        value={patientTreatments}
                         onChange={(event) =>
-                            setPatientMedicalHistory(event.target.value)
+                            setPatientTreatments(event.target.value)
                         }
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                 </div>
+
                 <div className="mb-4">
                     <label
                         className="block text-gray-700 text-sm font-bold mb-2"
-                        htmlFor="patientMedicalHistory"
+                        htmlFor="patientSurgeries"
                     >
                         Intervenciones Quirúrgicas:
                     </label>
                     <textarea
-                        id="patientMedicalHistory"
-                        value={patientMedicalHistory}
+                        id="patientSurgeries"
+                        value={patientSurgeries}
                         onChange={(event) =>
-                            setPatientMedicalHistory(event.target.value)
+                            setPatientSurgeries(event.target.value)
                         }
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                 </div>
+
                 <div className="mb-4">
                     <label
                         className="block text-gray-700 text-sm font-bold mb-2"
-                        htmlFor="patientMedicalHistory"
+                        htmlFor="patientAttachments"
                     >
                         Anexos:
                     </label>
@@ -184,11 +207,23 @@ const Index = () => {
                         </span>
                         <input
                             type="file"
+                            id="patientAttachments"
+                            onChange={(event) =>
+                                setPatientAttachments(event.target.files[0])
+                            }
                             className="h-full absolute left-0 opacity-0 cursor-pointer"
                         />
                     </div>
                 </div>
-                <div className="w-full flex justify-center">
+                <div className="w-full py-2">
+                    <Link
+                        to="/dashboard/odontograma"
+                        className="p-2 bg-blue-500 hover:bg-blue-300 duration-300 text-white font-bold py-2 px-4 rounded uppercase"
+                    >
+                        Modificar odontograma del paciente
+                    </Link>
+                </div>
+                <div className="w-full flex justify-center mt-10">
                     <button
                         type="submit"
                         className="bg-blue-500 hover:bg-blue-300 duration-300 text-white font-bold py-2 px-4 rounded uppercase"

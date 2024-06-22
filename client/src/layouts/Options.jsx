@@ -32,6 +32,12 @@ const navOptions = [
         role: 'admin',
         icon: ProfileIcon,
     },
+    {
+        name: 'Historial',
+        path: '/dashboard/historial',
+        role: 'admin',
+        icon: FileIcon,
+    },
 ];
 
 const Options = () => {

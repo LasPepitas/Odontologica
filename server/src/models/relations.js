@@ -87,3 +87,10 @@ Payment.belongsTo(User, {
     foreignKey: 'id_user',
     targetKey: 'id',
 });
+
+// RELATION USER ACCOUNT WITH DENTIST
+
+Dentist.belongsTo(User, {
+    foreignKey: 'id_user',
+    targetKey: 'id',
+});

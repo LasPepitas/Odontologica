@@ -17,6 +17,7 @@ import LandigPage from '../pages/Landing/LandigPage';
 import PerfilPage from '../pages/Perfil/PerfilPage';
 import Pagos from '../pages/Turnos/Pagos/Pagos';
 import PatientIndividual from '../pages/Dashboard/Patients/PatientIndividual';
+import Odontograma from '../pages/Dashboard/Odontograma/Odontograma';
 
 export const router = createBrowserRouter([
     {
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
                                 path: 'historial',
                                 element: <HistorialPage />,
                             },
+                            {
+                                path: 'odontograma',
+                                element: <Odontograma/>,
+                            }
                         ],
                     },
                     { index: true, element: <PerfilPage /> },

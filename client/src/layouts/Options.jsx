@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { ProfileIcon, ScheduleIcon, FileIcon } from './iconsNav';
+import { ProfileIcon, ScheduleIcon, FileIcon, ToothIcon } from './iconsNav';
 import { useSelector } from 'react-redux';
 const navOptions = [
     {
@@ -38,6 +38,12 @@ const navOptions = [
         path: '/dashboard/historial',
         role: 'dentist',
         icon: FileIcon,
+    },
+    {
+        name: 'Odontograma',
+        path: '/dashboard/odontograma',
+        role: 'dentist',
+        icon: ToothIcon,
     },
 ];
 

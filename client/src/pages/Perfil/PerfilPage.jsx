@@ -1,4 +1,3 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import { useSelector } from 'react-redux';
 import { EditIcon } from '../../assets/icons';
 import { useEffect, useState } from 'react';
@@ -8,7 +7,6 @@ import './waves.css';
 
 const PerfilPage = () => {
     const { user } = useSelector((state) => state.user);
-    const { user: userGoogle, isAuthenticated, isLoading } = useAuth0();
     const [consultasDetalles, SetConsultasDetalles] = useState([]);
 
     console.log(user.id);

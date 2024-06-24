@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 
 export default function Header({ data }) {
     return (
-        <header className="bg-white fixed w-full">
+        <header className="bg-white fixed w-full h-16 z-50">
             <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                     <div className="md:flex md:items-center md:gap-12">
                         {/* URL a con imagen */}
                         <img
-                            className="h-12"
+                            className="h-8 lg:h-12"
                             src="https://seeklogo.com/images/F/family-dental-healt-logo-CF68B43664-seeklogo.com.png"
                             alt="Family Dental Health Logo"
                         />
@@ -68,10 +68,10 @@ export default function Header({ data }) {
                     <div className="flex items-center gap-4">
                         <div className="sm:flex sm:gap-4">
                             <Link
-                                className="rounded-md bg-[#636ff1] px-5 py-2.5 text-sm font-medium text-white shadow"
-                                to="/dashboard"
+                                className="rounded-md font-bold bg-[#636ff1] px-5 py-2.5 text-sm text-white shadow"
+                                to="/login"
                             >
-                                Login
+                                Iniciar Sesión
                             </Link>
                         </div>
                     </div>

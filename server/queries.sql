@@ -1,5 +1,7 @@
-INSERT INTO dentists (name, lastName, email, password, specialty, schedule, createdAt, updatedAt) 
-VALUES ('Juan', 'Pérez', 'renerolando321@gmail.com', 'password123', 1, 'Monday-Friday 9am-5pm', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+
+INSERT INTO dentists ( specialty, schedule, createdAt, updatedAt, id_user)
+VALUES ( 1, 'Monday-Friday 9am-5pm', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '6b85a854-309e-493d-80b0-980bcde83d14' );
 
 INSERT INTO treatments (id, name, description, duration, price, createdAt, updatedAt)
 VALUES 
@@ -15,4 +17,4 @@ VALUES
 ('10', 'Oral Examination', 'Comprehensive dental examination', 45, 75.00, NOW(), NOW());
 
 -- CREATE DENTIST
-UPDATE users SET role = 'dentist' WHERE id='UUID';
+UPDATE users SET role = 'dentist' WHERE id='6b85a854-309e-493d-80b0-980bcde83d14';

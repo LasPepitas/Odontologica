@@ -11,6 +11,10 @@ const Dentist = sequelize.define('dentist', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     schedule: {
         type: DataTypes.STRING,
         allowNull: false,

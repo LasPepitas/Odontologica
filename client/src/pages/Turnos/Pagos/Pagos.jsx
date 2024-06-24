@@ -50,7 +50,7 @@ function Pagos() {
 
         try {
             const response = await fetch(
-                'https://odontologica.onrender.com/api/v1/appointments',
+                'http://localhost:3000/api/v1/appointments',
                 {
                     method: 'POST',
                     body: formData,

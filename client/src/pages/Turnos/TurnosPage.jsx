@@ -14,18 +14,6 @@ const TurnosPage = () => {
         try {
             const appointments = await getAppointmentsByDentist(1);
             const dias = getNextSevenDays();
-            console.log('----------------');
-            console.log(
-                'appointments',
-                new Date(appointments[1].date).toISOString(),
-            );
-            console.log(
-                'dias',
-                new Date(
-                    dias[1].format('YYYY-MM-DD') + ' ' + hours[1],
-                ).toISOString(),
-            );
-            console.log('----------------');
             const fechasGeneradas = [];
             dias.forEach((dia) => {
                 hours.forEach((hora) => {

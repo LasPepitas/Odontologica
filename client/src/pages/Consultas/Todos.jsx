@@ -39,7 +39,7 @@ function Todos({ isLoading, data }) {
                         {
                             id: 1,
                             icon: DetailsIcon,
-                            funcion: (() => null),
+                            funcion: (() => {console.log("todos")}),
                         },
                     ]}
                 />

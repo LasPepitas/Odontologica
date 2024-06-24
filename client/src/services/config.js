@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-    // baseURL: 'https://odontologica.onrender.com/api/v1',
-    baseURL: 'http://localhost:3000/api/v1',
+    baseURL: 'https://odontologica.onrender.com/api/v1',
+    // baseURL: 'http://localhost:3000/api/v1',
 });
 
 api.interceptors.request.use(

@@ -1,21 +1,32 @@
+import { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CanvasDraw from 'react-canvas-draw';
 import { FondoCanvas } from '../../../assets/images';
 
 function Odontograma() {
   const [color, setColor] = useState("red");
-  const [iconColor, setIconColor] = useState("#1C274C")
+  const [iconColor, setIconColor] = useState("#1C274C");
   const navigate = useNavigate();
   const [value, setValue] = useState(1);
   const canvasRef = useRef(null);
   const [isErasing, setIsErasing] = useState(false);
   const [eraseColor, setEraseColor] = useState("#FFFFFF"); // Color blanco para simular borrado
+  const isDrawingRef = useRef(false);
+  const lastPosRef = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    const img = new Image();
+    img.src = FondoCanvas;
+    img.onload = () => {
+      context.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
+  }, []);
 
   const handleOdont = () => {
-    // Obtener los datos del dibujo actual en formato JSON
-    const drawingData = canvasRef.current.getSaveData();
+    //const canvas = canvasRef.current;
+    //const drawingData = canvas.toDataURL();
     
     // Aquí puedes enviar drawingData a tu backend para guardar
 
@@ -32,18 +43,59 @@ function Odontograma() {
   };
 
   const handleClear = () => {
-    canvasRef.current.clear();
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    const img = new Image();
+    img.src = FondoCanvas;
+    img.onload = () => {
+      context.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
   };
 
   const toggleEraser = () => {
     setIsErasing(!isErasing);
     if (isErasing) {
       setColor("red"); // Vuelve al color de dibujo principal
-      setIconColor("#1C274C")
+      setIconColor("#1C274C");
     } else {
-      setIconColor("blue")
+      setIconColor("blue");
       setEraseColor("#FFFFFF"); // Cambia al color de borrado (blanco)
     }
+  };
+
+  const getMousePos = (canvas, evt) => {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: evt.clientX - rect.left,
+      y: evt.clientY - rect.top
+    };
+  };
+
+  const startDrawing = (evt) => {
+    isDrawingRef.current = true;
+    lastPosRef.current = getMousePos(canvasRef.current, evt);
+  };
+
+  const stopDrawing = () => {
+    isDrawingRef.current = false;
+  };
+
+  const draw = (evt) => {
+    if (!isDrawingRef.current) return;
+
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    const mousePos = getMousePos(canvas, evt);
+
+    context.beginPath();
+    context.moveTo(lastPosRef.current.x, lastPosRef.current.y);
+    context.lineTo(mousePos.x, mousePos.y);
+    context.strokeStyle = isErasing ? eraseColor : color;
+    context.lineWidth = value;
+    context.stroke();
+
+    lastPosRef.current = mousePos;
   };
 
   return (
@@ -51,13 +103,15 @@ function Odontograma() {
       <h1 className="text-3xl font-bold mb-4">Odontograma</h1>
       <div className='flex items-center justify-center p-15 gap-10'>
         <div className='flex flex-col gap-5 items-center'>
-          <CanvasDraw
+          <canvas
             ref={canvasRef}
-            brushColor={isErasing ? eraseColor : color}
-            brushRadius={value}
-            imgSrc={FondoCanvas}
-            canvasHeight={500}
-            canvasWidth={650}
+            width={650}
+            height={500}
+            onMouseDown={startDrawing}
+            onMouseUp={stopDrawing}
+            onMouseOut={stopDrawing}
+            onMouseMove={draw}
+            style={{ border: '1px solid #000' }}
           />
           <input 
             type='range' 
@@ -74,7 +128,7 @@ function Odontograma() {
             onClick={() => handleColor('red')}
           />
           <button 
-            className={`h-16 w-16 rounded-full bg-blue-500  border-solid border-green-100 border-[10px] focus:border-green-300`}
+            className={`h-16 w-16 rounded-full bg-blue-500 border-solid border-green-100 border-[10px] focus:border-green-300`}
             onClick={() => handleColor('blue')}
           />
           <button 
@@ -96,11 +150,11 @@ function Odontograma() {
             onClick={handleClear}
           >
             <svg width={45} height={45} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 12V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M14 12V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M4 7H20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10 12V17" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M14 12V17" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M4 7H20" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
         </div>        

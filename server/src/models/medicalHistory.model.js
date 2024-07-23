@@ -8,15 +8,17 @@ const MedicalHistory = sequelize.define('medicalHistory', {
         primaryKey: true,
         allowNull: false,
     },
-    recommendations: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    image_url: {
+    odontograma_canva: {
         type: DataTypes.STRING,
         allowNull: true,
-        defaultValue:
-            'https://t3.ftcdn.net/jpg/03/58/90/78/360_F_358907879_Vdu96gF4XVhjCZxN2kCG0THTsSQi8IhT.jpg',
+    },
+    data_medica: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    anexos: {
+        type: DataTypes.STRING,
+        allowNull: true,
     },
 });
 
